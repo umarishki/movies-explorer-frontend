@@ -1,0 +1,48 @@
+.about-project {
+    background-color: #202020;
+    padding: 110px 0;
+}
+
+.about-project__content {
+    margin: 0 auto;
+    max-width: 1140px;
+}
+
+.about-project__text-blocks {
+    max-width: 1140px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+}
+
+@media screen and (max-width: 1279px) {
+    .about-project__content {
+        max-width: 668px;
+    }
+
+    .about-project__text-blocks {
+        max-width: 668px;
+    }
+
+    .about-project {
+        padding: 90px 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .about-project__content {
+        max-width: 284px;
+    }
+
+    .about-project__text-blocks {
+        max-width: 284px;
+        margin-top: 60px;
+        flex-direction: column;
+        align-items: center;
+        min-height: 272px;
+    }
+
+    .about-project {
+        padding: 70px 0;
+    }
+}

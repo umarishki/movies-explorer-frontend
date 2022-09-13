@@ -1,0 +1,115 @@
+.about-me {
+    padding: 110px 0 125px 0;
+    background-color: #202020;
+}
+
+.about-me__content {
+    margin: 0 auto;
+    max-width: 1140px;
+}
+
+.about-me__information {
+    display: grid;
+    grid-template-columns: minmax(min-content, 600px) minmax(min-content, 540px);
+    grid-template-rows: 58px 1fr 81px;
+    gap: 18px 0;
+    margin-top: 66px;
+}
+
+.about-me__subtitle {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+}
+
+.about-me__social-nets {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-self: end;
+}
+
+.about-me__link {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: white;
+    margin-right: 20px;
+}
+
+.about-me__image {
+    grid-column: span 1;
+    grid-row: span 3;
+    justify-self: right;
+}
+
+@media screen and (max-width: 1279px) {
+    .about-me__content {
+        max-width: 668px;
+    }
+
+    .about-me {
+        padding: 90px 0;
+    }
+
+    .about-me__information {
+        grid-template-columns: minmax(min-content, 364px) minmax(min-content, 304px);
+        grid-template-rows: 40px 1fr 88px;
+        gap: 16px 0;
+    }
+
+    .about-me__subtitle {
+        font-size: 40px;
+        line-height: 40px;
+    }
+
+    .about-me__image {
+        height: 307px;
+        width: 255px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .about-me__content {
+        max-width: 284px;
+    }
+
+    .about-me {
+        padding: 70px 0;
+    }
+
+    .about-me__information {
+        grid-template-columns: minmax(min-content, 284px);
+        grid-template-rows: 372px 36px fit-content(148px) 37px;
+        gap: 20px 0;
+        margin-top: 60px;
+    }
+    .about-me__image {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: right;
+        width: 284px;
+        height: auto;
+    }
+
+    .about-me__subtitle {
+        font-size: 30px;
+        line-height: 36px;
+        letter-spacing: -0.04em;
+    }
+
+    .about-me__link {
+        margin-right: 26px;
+    }
+}
