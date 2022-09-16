@@ -1,6 +1,7 @@
 .footer {
     padding-top: 79px;
     background-color: #202020;
+    flex-shrink: 0;
 }
 
 .footer__content {

@@ -7,7 +7,7 @@ function Navigation({ navigationClass, navigationList }) {
             <nav className={navigationClass === "" ? "navigation" : "navigation " + navigationClass}>
                 {navigationList.map((link, i) => (
                     <Link key={i} to={link.to} className={link.linkClass === "" ? "navigation__link" : "navigation__link " + link.linkClass}>
-                          {link.name}      
+                          {link.content}      
                     </Link>
                 ))}
             </nav>

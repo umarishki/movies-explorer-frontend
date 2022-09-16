@@ -1,0 +1,125 @@
+.search-form {
+    width: 1140px;
+    min-height: 72px;
+    margin: 70px auto 80px auto;
+    background: #2F2F2F;
+    border-radius: 9px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.search-form__input {
+    background-color: #2F2F2F;
+    width: 740px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-left: 10px;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #8B8B8B;
+}
+
+.search-form__input:focus {
+    outline-color: #8B8B8B;
+    outline-width: 1px;
+    outline-offset: 8px;
+    outline-style: solid;
+}
+
+.search-form__search-icon {
+    width: 34px;
+    height: 34px;
+    margin-left: 19px;
+}
+
+.search-form__button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 34px;
+    height: 34px;
+    background-color: transparent;
+    margin-left: 46px;
+}
+
+.search-form__button:focus {
+    outline-color: #8B8B8B;
+    outline-width: 1px;
+    outline-offset: 2px;
+    outline-style: dotted;
+}
+
+.search-form__button-icon {
+    cursor: pointer;
+}
+
+.search-form__separator {
+    height: 40px;
+    width: 1px;
+    background-color: #424242;
+    margin-left: 30px;
+    margin-right: 29px;
+}
+
+.search-form__slider-label {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin-left: 14px;
+}
+
+.search-form__checkbox-container {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+}
+
+.search-form__checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.search-form__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #EBEBEB;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.search-form__slider:before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    left: 6px;
+    bottom: 6px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.search-form__checkbox:checked+.search-form__slider {
+    background-color: #3DDC84;
+}
+
+.search-form__checkbox:checked+.search-form__slider:before {
+    transform: translateX(16px);
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+}

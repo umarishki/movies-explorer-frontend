@@ -3,17 +3,17 @@ import './Footer.css';
 
 function Footer() {
     const navigationList = [{
-        name: 'Яндекс.Практикум',
+        content: 'Яндекс.Практикум',
         to: '/sign-up',
         linkClass: 'navigation__link_type_footer'
     },
     {
-        name: 'Github',
+        content: 'Github',
         to: '/sign-in',
         linkClass: 'navigation__link_type_footer'
     },
     {
-        name: 'Facebook',
+        content: 'Facebook',
         to: '/sign-in',
         linkClass: 'navigation__link_type_footer'
     }];

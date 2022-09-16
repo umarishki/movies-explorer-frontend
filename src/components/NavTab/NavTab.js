@@ -4,17 +4,17 @@ import './NavTab.css';
 function NavTab() {
     
     const navigationList = [{
-        name: 'О проекте',
+        content: 'О проекте',
         to: '/sign-up',
         linkClass: 'navigation__link_type_underlined'
     },
     {
-        name: 'Технологии',
+        content: 'Технологии',
         to: '/sign-in',
         linkClass: 'navigation__link_type_underlined'
     },
     {
-        name: 'Студент',
+        content: 'Студент',
         to: '/sign-in',
         linkClass: 'navigation__link_type_underlined'
     }];
