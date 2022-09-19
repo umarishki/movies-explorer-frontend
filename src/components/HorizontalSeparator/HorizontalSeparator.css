@@ -1,0 +1,19 @@
+.movies__separator {
+    height: 1px;
+    width: 1140px;
+    background-color: #424242;
+    margin-bottom: 70px;
+}
+
+@media screen and (max-width: 1279px) {
+    .movies__separator {
+        width: 708px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .movies__separator {
+        width: 292px;
+        margin-bottom: 40px;
+    }
+}

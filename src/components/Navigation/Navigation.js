@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom';
 import './Navigation.css';
 
-function Navigation({ navigationClass, navigationList }) {
-    console.log(navigationList);
+function Navigation({ navigationClass, navigationList, children }) {
     return (
             <nav className={navigationClass === "" ? "navigation" : "navigation " + navigationClass}>
                 {navigationList.map((link, i) => (
@@ -10,6 +9,7 @@ function Navigation({ navigationClass, navigationList }) {
                           {link.content}      
                     </Link>
                 ))}
+                {children}
             </nav>
     );
 }

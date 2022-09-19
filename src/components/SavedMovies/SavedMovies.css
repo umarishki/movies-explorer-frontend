@@ -1,5 +1,4 @@
-.movies {
-    flex-grow: 1;
+.saved-movies {
     display: flex;
     flex-direction: column;
     align-items: center;

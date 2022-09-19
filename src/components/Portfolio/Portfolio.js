@@ -9,17 +9,17 @@ function Portfolio() {
                 <li className="list-item">
                     <a href="https://github.com/umarishki" rel="noopener noreferrer" className="portfolio__site-link">
                         <p className="portfolio__site-text">Статичный сайт</p>
-                        <img class="portfolio__arrow-link" src={arrowLink} alt="Иконка: стрелка" /></a>
+                        <img className="portfolio__arrow-link" src={arrowLink} alt="Иконка: стрелка" /></a>
                 </li>
                 <li className="list-item">
                     <a href="https://github.com/umarishki" rel="noopener noreferrer" className="portfolio__site-link">
                         <p className="portfolio__site-text">Адаптивный сайт</p>
-                        <img class="portfolio__arrow-link" src={arrowLink} alt="Иконка: стрелка" /></a>
+                        <img className="portfolio__arrow-link" src={arrowLink} alt="Иконка: стрелка" /></a>
                 </li>
                 <li className="list-item">
                     <a href="https://github.com/umarishki" rel="noopener noreferrer" className="portfolio__site-link">
                         <p className="portfolio__site-text">Одностраничное приложение</p>
-                        <img class="portfolio__arrow-link" src={arrowLink} alt="Иконка: стрелка" /></a>
+                        <img className="portfolio__arrow-link" src={arrowLink} alt="Иконка: стрелка" /></a>
                 </li>
             </ul>
         </div>
