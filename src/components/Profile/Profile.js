@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import FormFrameButton from '../FormButton/FormButton';
 import './Profile.css';
-import FormTitle from '../FormTitle/FormTitle';
+import PageWithForm from '../PageWithForm/PageWithForm';
+import FormButton from '../FormButton/FormButton';
 
 function Profile({ currentUser }) {
 
@@ -33,40 +33,41 @@ function Profile({ currentUser }) {
 
     return (
         <div className="profile">
-            <FormTitle title={"Привет, " + currentUser.name} />
-            {isEditProcess ? (
-                <div className="profile__container">
-                    <div className="profile__fields-container">
-                        <p className="profile__subtitle">Имя</p>
-                        <input className="profile__input" type="text" name="name" placeholder="Введите имя" onChange={handleSetName} value={name || ''} required />
-                    </div>
-                    <div className="profile__fields-container">
-                        <p className="profile__subtitle">E-mail</p>
-                        <input className="profile__input" type="email" name="email" placeholder="Введите E-mail" onChange={handleSetEmail} value={email || ''} required />
-                    </div>
-                    <FormFrameButton title={"Сохранить"} />
-                </div>
-            ) :
-                (
+            <PageWithForm title={"Привет, " + currentUser.name} buttonTitle={"Сохранить"}>
+                {isEditProcess ? (
                     <div className="profile__container">
                         <div className="profile__fields-container">
                             <p className="profile__subtitle">Имя</p>
-                            <span className="profile__field">{currentUser.name}</span>
+                            <input className="profile__input" type="text" name="name" placeholder="Введите имя" onChange={handleSetName} value={name || ''} required />
                         </div>
                         <div className="profile__fields-container">
                             <p className="profile__subtitle">E-mail</p>
-                            <span className="profile__field">{currentUser.email}</span>
+                            <input className="profile__input" type="email" name="email" placeholder="Введите E-mail" onChange={handleSetEmail} value={email || ''} required />
                         </div>
-                        <ul className="profile__menu">
-                            <li className="profile__list-item">
-                                <button className="profile__link-button" onClick={handleEditButtonClick}>Редактировать</button>
-                            </li>
-                            <li className="profile__list-item">
-                                <button className="profile__link-button">Выйти из аккаунта</button>
-                            </li>
-                        </ul>
+                        <FormButton title={"Сохранить"}/>
                     </div>
-                )}
+                ) :
+                    (
+                        <div className="profile__container">
+                            <div className="profile__fields-container">
+                                <p className="profile__subtitle">Имя</p>
+                                <span className="profile__field">{currentUser.name}</span>
+                            </div>
+                            <div className="profile__fields-container">
+                                <p className="profile__subtitle">E-mail</p>
+                                <span className="profile__field">{currentUser.email}</span>
+                            </div>
+                            <ul className="profile__menu">
+                                <li className="profile__list-item">
+                                    <button className="profile__link-button" onClick={handleEditButtonClick}>Редактировать</button>
+                                </li>
+                                <li className="profile__list-item">
+                                    <button className="profile__link-button">Выйти из аккаунта</button>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
+            </PageWithForm>
         </div>
     );
 };

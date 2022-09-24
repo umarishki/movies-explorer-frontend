@@ -1,25 +1,22 @@
-import FormButton from '../FormButton/FormButton';
-import Logo from '../Logo/Logo';
-import './Login.css';
-import FormTitle from '../FormTitle/FormTitle';
+import PageWithForm from '../PageWithForm/PageWithForm';
+import "./Login.css";
 
 function Login() {
 
     return (
         <div className="login">
-            <Logo />
-            <FormTitle title={"Рады видеть!"} />
-            <div className="login__container">
-                <div className="login__fields-container">
-                    <p className="login__subtitle">E-mail</p>
-                    <input className="login__input" placeholder="Введите E-mail" />
+            <PageWithForm title={"Рады видеть"} buttonTitle={"Войти"} text={"Ещё не зарегистрированы?"} link={"/signup"} textLink={"Регистрация"}>
+                <div className="login__container">
+                    <div className="login__fields-container">
+                        <p className="login__subtitle">E-mail</p>
+                        <input className="login__input" placeholder="Введите E-mail" />
+                    </div>
+                    <div className="login__fields-container">
+                        <p className="login__subtitle">Пароль</p>
+                        <input className="login__input" placeholder="Введите пароль" />
+                    </div>
                 </div>
-                <div className="login__fields-container">
-                    <p className="login__subtitle">Пароль</p>
-                    <input className="login__input" placeholder="Введите пароль" />
-                </div>
-            </div>
-            <FormButton title={"Войти"} />
+            </PageWithForm>
         </div>
     );
 }

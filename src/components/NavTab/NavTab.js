@@ -21,7 +21,7 @@ function NavTab() {
 
     return (
         <section className="navtab">
-            <Navigation navigationClass={ null } navigationList={ navigationList } />
+            <Navigation navigationClass={ null } navigationList={ navigationList } isExternalLink={true}/>
         </section>
     );
 }

@@ -46,3 +46,22 @@
 .login__fields-container:last-of-type {
     margin-bottom: 91px;
 }
+
+@media screen and (max-width: 767px) {
+    .login {
+        width: 260px;
+        align-items: center;
+    }
+
+    .login__container {
+        margin-top: 80px;
+    }
+
+    .login__input {
+        width: 260px;
+    }
+
+    .login__fields-container:last-of-type {
+        margin-bottom: 247px;
+    }
+}

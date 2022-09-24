@@ -9,6 +9,7 @@ import Popup from '../Popup/Popup';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import NotFoundPage from '../NotFoundPage/NotFoundPage';
 
 function App() {
 
@@ -110,7 +111,7 @@ function App() {
           <Main />
         </Route>
         <Route path="*">
-          {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />} */}
+          <NotFoundPage />
         </Route>
       </Switch>
       <Footer />
@@ -119,6 +120,7 @@ function App() {
         onClose={handleCloseButtonClick}
         isOpened={isPopupOpened}
       />
+      {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />} */}
     </>
   );
 }

@@ -11,4 +11,13 @@
     line-height: 17px;
     text-align: center;
     color: #FFFFFF;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+    .form-button {
+        width: 260px;
+        font-size: 12px;
+        line-height: 15px;
+    }
 }

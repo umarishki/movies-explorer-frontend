@@ -46,3 +46,22 @@
 .register__fields-container:last-of-type {
     margin-bottom: 91px;
 }
+
+@media screen and (max-width: 767px) {
+    .register {
+        width: 260px;
+        align-items: center;
+    }
+
+    .register__container {
+        margin-top: 80px;
+    }
+
+    .register__input {
+        width: 260px;
+    }
+
+    .register__fields-container:last-of-type {
+        margin-bottom: 247px;
+    }
+}

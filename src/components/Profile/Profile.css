@@ -1,4 +1,5 @@
 .profile {
+    flex-grow: 1;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -99,4 +100,36 @@
     color: #FFFFFF;
     outline: none;
     width: 350px;
+}
+
+@media screen and (max-width: 767px) {
+    .profile {
+        width: 260px;
+        margin-top: 20px;
+    }
+
+    .profile__container {
+        margin-top: 80px;
+    }
+
+    .profile__fields-container {
+        width: 260px;
+    }
+
+    .profile__fields-container:last-of-type {
+        margin-bottom: 179px;
+    }
+    
+    .profile__link-button {
+        font-size: 12px;
+        line-height: 15px;
+    }
+    
+    .profile__input {
+        width: 200px;
+    }
+
+    .profile__menu {
+        margin-top: 184px;
+    }
 }

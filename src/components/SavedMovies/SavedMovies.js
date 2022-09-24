@@ -2,6 +2,8 @@ import MoreButton from '../MoreButton/MoreButton';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import poster from '../../images/poster.png';
 import './SavedMovies.css';
+import SearchForm from '../SearchForm/SearchForm';
+import HorizontalSeparator from '../HorizontalSeparator/HorizontalSeparator';
 
 function SavedMovies() {
     const moviesArray = [{
@@ -56,8 +58,9 @@ function SavedMovies() {
     ];
     return (
         <div className="saved-movies">
+            <SearchForm />
+            <HorizontalSeparator />
             <MoviesCardList moviesArray={ moviesArray } isUserPage={ true }/>
-            <MoreButton moviesArray={ moviesArray }/>
         </div>
     );
 }
