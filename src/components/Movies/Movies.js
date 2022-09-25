@@ -96,7 +96,7 @@ function Movies() {
     ];
 
     const handleSetIsLoading = () => {
-
+        setIsLoading(true);
     };
 
     return (
