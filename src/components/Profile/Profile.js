@@ -30,24 +30,24 @@ function Profile({ currentUser }) {
 
     const handleEditButtonClick = () => {
         setIsEditProcess(true);
-        console.log(isEditProcess);
     }
 
     return (
         <div className="profile">
             <PageWithForm title={"Привет, " + currentUser.name} buttonTitle={"Сохранить"}>
-                {isEditProcess ? (
-                    <div className="profile__container">
-                        <div className="profile__fields__content">
-                            <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={"Введите имя"} inputType={"text"} inputName={"name"} handleSetValue={handleSetName} currentValue={name} />
-                            <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={"Введите E-mail"} inputType={"email"} inputName={"email"} handleSetValue={handleSetEmail} currentValue={email} />
-                            {/* <FormErrorField errorText={"Что-то пошло не так..."} /> */}
-                        </div>
-                        <FormButton title={"Сохранить"} />
-                    </div>
-                ) :
+                <div className="profile__container">
+                    {isEditProcess ? (
+                        <>
+                            <div className="profile__fields__content">
+                                <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={"Введите имя"} inputType={"text"} inputName={"name"} handleSetValue={handleSetName} currentValue={name} />
+                                <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={"Введите E-mail"} inputType={"email"} inputName={"email"} handleSetValue={handleSetEmail} currentValue={email} />
+                                {/* <FormErrorField errorText={"Что-то пошло не так..."} /> */}
+                            </div>
+                            <FormButton title={"Сохранить"} />
+                        </>
+                    ) :
                     (
-                        <div className="profile__container">
+                        <>
                             <div className="profile__fields__content">
                                 <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={null} inputType={null} inputName={null} handleSetValue={null} currentValue={name} />
                                 <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={null} inputType={null} inputName={null} handleSetValue={null} currentValue={email} />
@@ -60,8 +60,9 @@ function Profile({ currentUser }) {
                                     <button className="profile__link-button">Выйти из аккаунта</button>
                                 </li>
                             </ul>
-                        </div>
+                        </>
                     )}
+                </div>
             </PageWithForm>
         </div>
     );

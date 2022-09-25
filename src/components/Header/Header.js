@@ -3,11 +3,13 @@ import { Route, Switch } from 'react-router-dom';
 import NavigationWithInnerMenu from '../NavigationWithInnerMenu/NavigationWithInnerMenu';
 import './Header.css';
 import Logo from '../Logo/Logo';
+import { useLocation } from "react-router";
 
-function Header({ isBackgroundColorBlue, onColorBlue, onBurgerMenuClick, navigationListForInnerMenu, navigationListForMainPage }) {
+function Header({ onBurgerMenuClick, navigationListForInnerMenu, navigationListForMainPage }) {
+    const location = useLocation();
 
     return (
-        <header className={isBackgroundColorBlue ? "header header_background-color_blue" : "header"}>
+        <header className={location.pathname === "/" ? "header header_background-color_blue" : "header"}>
             <div className='header__content'>
                 <Switch>
                     <Route exact path="/">
@@ -17,10 +19,6 @@ function Header({ isBackgroundColorBlue, onColorBlue, onBurgerMenuClick, navigat
                             navigationList={navigationListForMainPage}
                             isExternalLink={true}
                         />
-                    </Route>
-                    <Route exact path="/signin">
-                    </Route>
-                    <Route exact path="/signup">
                     </Route>
                     <Route exact path="/movies">
                         <NavigationWithInnerMenu
@@ -40,7 +38,7 @@ function Header({ isBackgroundColorBlue, onColorBlue, onBurgerMenuClick, navigat
                             onBurgerMenuClick={onBurgerMenuClick}
                         />
                     </Route>
-                    <Route exact path="/*">
+                    <Route path="/*">
                     </Route>
                 </Switch>
             </div>

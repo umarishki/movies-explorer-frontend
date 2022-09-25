@@ -6,7 +6,6 @@ import FormButton from '../FormButton/FormButton';
 import ButtonNote from '../ButtonNote/ButtonNote';
 
 function PageWithForm({ title, buttonTitle, text, link, textLink, children }) {
-    console.log(link);
     return (
         <>
             <Switch>

@@ -14,7 +14,6 @@ import NotFoundPage from '../NotFoundPage/NotFoundPage';
 function App() {
 
   const [isPopupOpened, setIsPopupOpened] = useState(false);
-  const [isBackgroundColorBlue, setIsBackgroundColorBlue] = useState(false);
 
   const currentUser = {
     name: "Виталий",
@@ -70,15 +69,6 @@ function App() {
     },
   ];
 
-  const handleChangeBackgroundColorOnBlue = (setBlue) => {
-    if (setBlue) {
-      console.log(setBlue);
-      return setIsBackgroundColorBlue(true);
-    }
-    console.log(setBlue);
-    return setIsBackgroundColorBlue(false);
-  }
-
   const handleBurgerMenuClick = () => {
     isPopupOpened ? setIsPopupOpened(false) : setIsPopupOpened(true);
   }
@@ -90,8 +80,6 @@ function App() {
   return (
     <>
       <Header
-        isBackgroundColorBlue={isBackgroundColorBlue}
-        onColorBlue={handleChangeBackgroundColorOnBlue}
         onBurgerMenuClick={handleBurgerMenuClick}
         navigationListForInnerMenu={navigationListForInnerMenu}
         navigationListForMainPage={navigationListForMainPage}
