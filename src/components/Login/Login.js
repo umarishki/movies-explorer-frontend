@@ -1,20 +1,15 @@
+import FormFieldsWithInput from '../FormFieldsWithInput/FormFieldsWithInput';
 import PageWithForm from '../PageWithForm/PageWithForm';
-import "./Login.css";
+import './Login.css';
 
 function Login() {
 
     return (
         <div className="login">
             <PageWithForm title={"Рады видеть"} buttonTitle={"Войти"} text={"Ещё не зарегистрированы?"} link={"/signup"} textLink={"Регистрация"}>
-                <div className="login__container">
-                    <div className="login__fields-container">
-                        <p className="login__subtitle">E-mail</p>
-                        <input className="login__input" placeholder="Введите E-mail" />
-                    </div>
-                    <div className="login__fields-container">
-                        <p className="login__subtitle">Пароль</p>
-                        <input className="login__input" placeholder="Введите пароль" />
-                    </div>
+                <div className="form__container">
+                    <FormFieldsWithInput subtitle={"E-mail"} placeholder={"Введите E-mail"} errorText={"Что-то пошло не так, текст длинной ошибки для демонстрации поля с какой-то ошибкой"}/>
+                    <FormFieldsWithInput subtitle={"Пароль"} placeholder={"Введите пароль"} errorText={"Что-то пошло не так, текст длинной ошибки для демонстрации поля с какой-то ошибкой"}/>
                 </div>
             </PageWithForm>
         </div>

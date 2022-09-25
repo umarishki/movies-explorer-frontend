@@ -28,6 +28,13 @@
     margin-left: 6px;
 }
 
+.button-note__link:focus-visible {
+    outline-color: #8B8B8B;
+    outline-width: 1px;
+    outline-offset: 1px;
+    outline-style: dotted;
+}
+
 @media screen and (max-width: 767px) {
     .button-note {
         margin-top: 14px;

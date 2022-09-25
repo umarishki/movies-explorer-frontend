@@ -20,6 +20,13 @@
     cursor: pointer;
 }
 
+.more-button__button:focus-visible {
+    outline-color: #8B8B8B;
+    outline-width: 1px;
+    outline-offset: 1px;
+    outline-style: dotted;
+}
+
 @media screen and (max-width: 1279px) {
     .more-button__container {
         height: 166px;

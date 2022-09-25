@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './Profile.css';
 import PageWithForm from '../PageWithForm/PageWithForm';
 import FormButton from '../FormButton/FormButton';
+import FormErrorField from '../FormErrorField/FormErrorField';
+import FormFieldsForProfile from '../FormFieldsForProfile/FormFieldsForProfile';
 
 function Profile({ currentUser }) {
 
@@ -36,26 +38,19 @@ function Profile({ currentUser }) {
             <PageWithForm title={"Привет, " + currentUser.name} buttonTitle={"Сохранить"}>
                 {isEditProcess ? (
                     <div className="profile__container">
-                        <div className="profile__fields-container">
-                            <p className="profile__subtitle">Имя</p>
-                            <input className="profile__input" type="text" name="name" placeholder="Введите имя" onChange={handleSetName} value={name || ''} required />
+                        <div className="profile__fields__content">
+                            <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={"Введите имя"} inputType={"text"} inputName={"name"} handleSetValue={handleSetName} currentValue={name} />
+                            <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={"Введите E-mail"} inputType={"email"} inputName={"email"} handleSetValue={handleSetEmail} currentValue={email} />
+                            {/* <FormErrorField errorText={"Что-то пошло не так..."} /> */}
                         </div>
-                        <div className="profile__fields-container">
-                            <p className="profile__subtitle">E-mail</p>
-                            <input className="profile__input" type="email" name="email" placeholder="Введите E-mail" onChange={handleSetEmail} value={email || ''} required />
-                        </div>
-                        <FormButton title={"Сохранить"}/>
+                        <FormButton title={"Сохранить"} />
                     </div>
                 ) :
                     (
                         <div className="profile__container">
-                            <div className="profile__fields-container">
-                                <p className="profile__subtitle">Имя</p>
-                                <span className="profile__field">{currentUser.name}</span>
-                            </div>
-                            <div className="profile__fields-container">
-                                <p className="profile__subtitle">E-mail</p>
-                                <span className="profile__field">{currentUser.email}</span>
+                            <div className="profile__fields__content">
+                                <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={null} inputType={null} inputName={null} handleSetValue={null} currentValue={name} />
+                                <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={null} inputType={null} inputName={null} handleSetValue={null} currentValue={email} />
                             </div>
                             <ul className="profile__menu">
                                 <li className="profile__list-item">

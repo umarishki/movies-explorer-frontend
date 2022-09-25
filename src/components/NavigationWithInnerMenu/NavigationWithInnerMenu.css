@@ -11,6 +11,10 @@
     line-height: 18px;
 }
 
+.navigation__link_type_active-inner-page {
+    font-weight: 500;
+}
+
 .navigation__link_type_inner-page:last-of-type {
     margin-left: auto;
 }
@@ -54,6 +58,10 @@
         align-items: center;
         height: 865px;
         margin-top: 106.5px;
+    }
+
+    .navigation__link_type_active-burger-menu {
+        border-bottom: 2px #FFFFFF solid;
     }
 
     .navigation__burger-button {

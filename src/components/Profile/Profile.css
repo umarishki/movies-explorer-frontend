@@ -15,41 +15,8 @@
     margin-top: 123px;
 }
 
-.profile__fields-container {
-    display: flex;
-    width: 410px;
-    justify-content: space-between;
-    border-bottom: 1px #424242 solid;
-    margin-bottom: 17px;
-}
-
-.profile__fields-container:last-of-type {
-    border: none;
+.profile__fields__content {
     margin-bottom: 204px;
-}
-
-.profile__subtitle {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 11px;
-    line-height: 13px;
-    text-align: left;
-    padding-bottom: 16px;
-}
-
-.profile__field {
-    margin: 0;
-    padding: 0;
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 11px;
-    line-height: 13px;
-    text-align: right;
-    padding-bottom: 16px;
 }
 
 .profile__menu {
@@ -64,10 +31,15 @@
 .profile__list-item {
     margin-top: 16px;
     color: #FFFFFF;
+    transition: opacity 0.5s ease;
 }
 
 .profile__list-item:last-of-type {
     color: #EE3465;
+}
+
+.profile__list-item:hover {
+    opacity: 0.7;
 }
 
 .profile__link-button {
@@ -85,21 +57,11 @@
     cursor: pointer;
 }
 
-.profile__input {
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    font-family: 'Inter', Arial, Helvetica, sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 11px;
-    line-height: 13px;
-    text-align: right;
-    padding-bottom: 16px;
-    color: #FFFFFF;
-    outline: none;
-    width: 350px;
+.profile__link-button:focus-visible {
+    outline-color: #8B8B8B;
+    outline-width: 1px;
+    outline-offset: 1px;
+    outline-style: dotted;
 }
 
 @media screen and (max-width: 767px) {
@@ -112,10 +74,6 @@
         margin-top: 80px;
     }
 
-    .profile__fields-container {
-        width: 260px;
-    }
-
     .profile__fields-container:last-of-type {
         margin-bottom: 179px;
     }
@@ -123,10 +81,6 @@
     .profile__link-button {
         font-size: 12px;
         line-height: 15px;
-    }
-    
-    .profile__input {
-        width: 200px;
     }
 
     .profile__menu {

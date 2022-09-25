@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Movies from '../Movies/Movies';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -38,12 +38,14 @@ function App() {
     {
       content: 'Фильмы',
       to: '/movies',
-      linkClass: 'navigation__link_type_inner-page'
+      linkClass: 'navigation__link_type_inner-page',
+      activeLinkClass: 'navigation__link_type_active-inner-page'
     },
     {
       content: 'Сохранённые фильмы',
       to: '/saved-movies',
-      linkClass: 'navigation__link_type_inner-page'
+      linkClass: 'navigation__link_type_inner-page',
+      activeLinkClass: 'navigation__link_type_active-inner-page'
     },
   ];
 
@@ -51,17 +53,20 @@ function App() {
     {
       content: 'Главная',
       to: '/',
-      linkClass: 'navigation__link_type_burger-menu'
+      linkClass: 'navigation__link_type_burger-menu',
+      activeLinkClass: 'navigation__link_type_active-burger-menu'
     },
     {
       content: 'Фильмы',
       to: '/movies',
-      linkClass: 'navigation__link_type_burger-menu'
+      linkClass: 'navigation__link_type_burger-menu',
+      activeLinkClass: 'navigation__link_type_active-burger-menu'
     },
     {
       content: 'Сохранённые фильмы',
       to: '/saved-movies',
-      linkClass: 'navigation__link_type_burger-menu'
+      linkClass: 'navigation__link_type_burger-menu',
+      activeLinkClass: 'navigation__link_type_active-burger-menu'
     },
   ];
 

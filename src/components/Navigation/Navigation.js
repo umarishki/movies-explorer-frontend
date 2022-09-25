@@ -1,14 +1,14 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 
-function Navigation({ navigationClass, navigationList, isExternalLink, children }) {
+function Navigation({ navigationClass, navigationList, isExternalLink, onClose, children }) {
     return (
         <nav className={navigationClass === "" ? "navigation" : "navigation " + navigationClass}>
             {isExternalLink ?
                 navigationList.map((link, i) => (
-                    <Link key={i} to={link.to} className={link.linkClass === "" ? "navigation__link" : "navigation__link " + link.linkClass}>
+                    <NavLink key={i} exact to={link.to} activeClassName={link.activeLinkClass || ""} className={link.linkClass === "" ? "navigation__link" : "navigation__link " + link.linkClass} onClick={onClose || null}>
                         {link.content}
-                    </Link>
+                    </NavLink>
                 ))
                 :
                 navigationList.map((link, i) => (
