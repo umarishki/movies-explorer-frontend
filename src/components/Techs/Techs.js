@@ -5,7 +5,7 @@ import './Techs.css';
 
 function Techs() {
     return (
-        <section className="techs">
+        <section className="techs" id="technologies">
             <article className="techs__content">
                 <SectionTitle
                     title={"Технологии"}

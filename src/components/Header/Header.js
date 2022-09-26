@@ -17,7 +17,8 @@ function Header({ onBurgerMenuClick, navigationListForInnerMenu, navigationListF
                         <Navigation
                             navigationClass={null}
                             navigationList={navigationListForMainPage}
-                            isExternalLink={true}
+                            isRoute={true}
+                            targetType={null}
                         />
                     </Route>
                     <Route exact path="/movies">
