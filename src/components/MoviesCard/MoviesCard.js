@@ -9,7 +9,7 @@ function MoviesCard({ title, time, poster, isSavedMovie, isUserPage }) {
         <li className="movies-card">
             <div className="movies-card__header">
                 <h3 className="movies-card__title">{ title }</h3>
-                <button className={ isUserPage ? "movies-card__save-button" : (isSavedMovie ? "movies-card__save-button movies-card__save-button_activated" : "movies-card__save-button") }>
+                <button type="button" className={ isUserPage ? "movies-card__save-button" : (isSavedMovie ? "movies-card__save-button movies-card__save-button_activated" : "movies-card__save-button") }>
                         <img className="movies-card__save-button-icon" src={ isUserPage ? deleteIcon : (isSavedMovie ? saveIconActive : saveIcon) } alt="Иконка кнопки" />
                 </button>
                 <p className="movies-card__time">{ time }</p>

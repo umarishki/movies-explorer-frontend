@@ -9,7 +9,7 @@ function Popup({ navigationList, onClose, isOpened }) {
     return (
         <div className={isOpened ? "popup popup__opened" : "popup"}>
             <div className="popup__container">
-                <button className="popup__close-button" onClick={onClose}>
+                <button className="popup__close-button" type="button" onClick={onClose}>
                     <img className="popup__close-button-icon" src={crossIcon} alt="Иконка: крестик" />
                 </button>
                 <Navigation navigationClass={"navigation_type_burger-menu"} navigationList={navigationList} isRoute={true} targetType={null} onClose={onClose} >

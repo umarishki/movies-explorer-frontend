@@ -7,7 +7,7 @@ function FormFieldsForProfile({isEditProcess, subtitle, placeholder, inputType, 
             <p className="profile__subtitle">{subtitle}</p>
             {isEditProcess ?
                 (
-                    <input className="profile__input" type={inputType} name={inputName} placeholder={placeholder} onChange={handleSetValue} value={currentValue || ''} required autocomplete="off"/>
+                    <input className="profile__input" type={inputType} name={inputName} placeholder={placeholder} onChange={handleSetValue} value={currentValue || ''} required autoComplete="off"/>
                 )
                 :
                 (

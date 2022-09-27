@@ -11,7 +11,7 @@ function NavigationWithInnerMenu({ navigationListForInnerMenu, onBurgerMenuClick
     return (
         <>
             <Logo />
-            <button className="navigation__burger-button" onClick={onBurgerMenuClick}>
+            <button className="navigation__burger-button" type="button" onClick={onBurgerMenuClick}>
                 <img className="navigation__burger-button-image" src={menuBurgerIcon} alt="Иконка: меню"></img>
             </button>
             <Navigation navigationClass={"navigation_type_inner-page"} navigationList={navigationListForInnerMenu} isRoute={true} targetType={null}>

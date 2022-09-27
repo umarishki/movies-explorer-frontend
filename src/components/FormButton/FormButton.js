@@ -3,7 +3,7 @@ import './FormButton.css';
 function FormButton({ title }) {
 
     return (
-        <button className="form-button">{ title }</button>
+        <button className="form-button" type="submit">{ title }</button>
     );
 };
 

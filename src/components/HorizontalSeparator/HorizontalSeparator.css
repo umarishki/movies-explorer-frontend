@@ -3,11 +3,13 @@
     width: 1140px;
     background-color: #424242;
     margin-bottom: 70px;
+    margin-top: 35px;
 }
 
 @media screen and (max-width: 1279px) {
     .movies__separator {
         width: 708px;
+        margin-top: 47px;
     }
 }
 
@@ -15,5 +17,6 @@
     .movies__separator {
         width: 292px;
         margin-bottom: 40px;
+        margin-top: 19px;
     }
 }

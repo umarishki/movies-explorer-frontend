@@ -6,7 +6,7 @@ import './Movies.css';
 import { useState } from 'react';
 
 function Movies() {
-
+    const [isDataRecieved, setIsDataRecieved] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
     const moviesArray = [{
@@ -95,15 +95,19 @@ function Movies() {
     }
     ];
 
-    const handleSetIsLoading = () => {
-        setIsLoading(true);
+    const handleChangeIsLoading = (isLoading) => {
+        setIsLoading(isLoading);
+    };
+
+    const handleChangeIsDataRecieved = (isDataRecieved) => {
+        setIsDataRecieved(isDataRecieved);
     };
 
     return (
         <div className="movies">
-            <SearchForm />
+            <SearchForm onLoad={handleChangeIsLoading} onDataReceive={handleChangeIsDataRecieved}/>
             <HorizontalSeparator />
-            <MoviesCardList moviesArray={ moviesArray } isUserPage={ false } isLoading={ isLoading } />
+            <MoviesCardList moviesArray={ moviesArray } isUserPage={ false } isLoading={ isLoading }  isDataRecieved={isDataRecieved}/>
         </div>
     );
 }

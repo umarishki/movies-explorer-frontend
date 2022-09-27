@@ -7,7 +7,7 @@ function NotFoundPage() {
         <div className="notfound-page">
             <h2 className="notfound-page__title">404</h2>
             <p className="notfound-page__text">Страница не найдена</p>
-            <button className="notfound-page__button" onClick={() => history.goBack()}>Назад</button>
+            <button className="notfound-page__button" type="button" onClick={() => history.goBack()}>Назад</button>
         </div>
     );
 };

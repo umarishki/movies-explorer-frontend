@@ -54,10 +54,10 @@ function Profile({ currentUser }) {
                             </div>
                             <ul className="profile__menu">
                                 <li className="profile__list-item">
-                                    <button className="profile__link-button" onClick={handleEditButtonClick}>Редактировать</button>
+                                    <button className="profile__link-button" type="button" onClick={handleEditButtonClick}>Редактировать</button>
                                 </li>
                                 <li className="profile__list-item">
-                                    <button className="profile__link-button">Выйти из аккаунта</button>
+                                    <button className="profile__link-button" type="button">Выйти из аккаунта</button>
                                 </li>
                             </ul>
                         </>
