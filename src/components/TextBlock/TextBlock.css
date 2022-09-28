@@ -1,0 +1,137 @@
+.text-block__title {
+    margin: 0;
+    padding: 0;
+    max-width: 550px;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: -0.04em;
+}
+
+.text-block__paragraph {
+    max-width: 550px;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin-top: 26px;
+}
+
+.text-block__title_type_techs {
+    max-width: 600px;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    margin-top: 90px;
+}
+
+.text-block__title_type_about-me {
+    max-width: 600px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    letter-spacing: 0;
+}
+
+.text-block__paragraph_type_techs {
+    max-width: 460px;
+    letter-spacing: -0.04em;
+    text-align: center;
+}
+
+.text-block__paragraph_type_about-me {
+    max-width: 600px;
+    letter-spacing: 0;
+    line-height: 22px;
+}
+
+@media screen and (max-width: 1279px) {
+    .text-block__title {
+        max-width: 319px;
+    }
+
+    .text-block__paragraph {
+        max-width: 319px;
+        margin-top: 22px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .text-block__title_type_techs {
+        max-width: 600px;
+        margin-top: 80px;
+        letter-spacing: -0.04em;
+    }
+
+    .text-block__paragraph_type_techs {
+        font-size: 12px;
+        line-height: 18px;
+        max-width: 460px;
+    }
+
+    .text-block__title_type_about-me {
+        max-width: 364px;
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .text-block__paragraph_type_about-me {
+        max-width: 364px;
+        letter-spacing: 0;
+        font-size: 12px;
+        line-height: 18px;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .text-block__title {
+        max-width: 284px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .text-block__paragraph {
+        max-width: 284px;
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 16px;
+    }
+
+    .text-block {
+        margin-bottom: 0;
+    }
+
+    .text-block__title_type_techs {
+        max-width: 292px;
+        margin-top: 60px;
+        font-size: 30px;
+        line-height: 36px;
+    }
+
+    .text-block__paragraph_type_techs {
+        max-width: 292px;
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 24px;
+    }
+
+    .text-block__title_type_about-me {
+        max-width: 364px;
+        font-size: 11px;
+        line-height: 16px;
+    }
+
+    .text-block__paragraph_type_about-me {
+        max-width: 364px;
+        letter-spacing: 0;
+        font-size: 11px;
+        line-height: 16px;
+        margin-top: 20px;
+    }
+}

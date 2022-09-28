@@ -1,0 +1,30 @@
+.header_background-color_blue {
+    background-color: #073042;
+}
+
+.header_background-color_grey {
+    background-color: #202020;
+}
+
+.header__content {
+    min-height: 74px;
+    max-width: 1140px;
+    margin: 0 auto;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+}
+
+@media screen and (max-width: 1279px) {
+    .header__content {
+        max-width: 708px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .header__content {
+        max-width: 292px;
+    }
+}

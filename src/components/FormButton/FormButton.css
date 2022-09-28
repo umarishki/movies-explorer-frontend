@@ -1,0 +1,35 @@
+.form-button {
+    background: #4285F4;
+    border-style: none;
+    border-radius: 3px;
+    width: 396px;
+    height: 45px;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
+.form-button:focus-visible {
+    outline-color: #8B8B8B;
+    outline-width: 2px;
+    outline-offset: 1px;
+    outline-style: dotted;
+}
+
+.form-button:hover {
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 767px) {
+    .form-button {
+        width: 260px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}

@@ -1,0 +1,228 @@
+.search-form {
+    width: 1140px;
+    min-height: 72px;
+    margin: 70px 0 30px 0;
+    background: #2F2F2F;
+    border-radius: 9px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.search-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-form__input {
+    background-color: #2F2F2F;
+    width: 740px;
+    border: none;
+    margin: 0;
+    padding: 0;
+    margin-left: 10px;
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.search-form__input-part {
+    display: flex;
+    align-items: center;
+    border-right: 1px #424242 solid;
+    padding-right: 30px;
+    margin-right: 30px;
+}
+
+.search-form__input:focus {
+    outline-color: #8B8B8B;
+    outline-width: 1px;
+    outline-offset: 8px;
+    outline-style: solid;
+}
+
+.search-form__search-icon {
+    width: 34px;
+    height: 34px;
+    margin-left: 19px;
+}
+
+.search-form__button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: 34px;
+    height: 34px;
+    background-color: transparent;
+    margin-left: 46px;
+    transition: opacity 0.5s ease;
+}
+
+.search-form__button:hover {
+    opacity: 0.8;
+}
+
+.search-form__button:focus-visible {
+    outline-color: #8B8B8B;
+    outline-width: 1px;
+    outline-offset: 2px;
+    outline-style: dotted;
+}
+
+.search-form__button-icon {
+    cursor: pointer;
+}
+
+.search-form__slider-label {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin-left: 14px;
+    cursor: pointer;
+}
+
+.search-form__checkbox-container {
+    position: relative;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+}
+
+.search-form__checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.search-form__slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #EBEBEB;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.search-form__slider:before {
+    position: absolute;
+    content: "";
+    height: 8px;
+    width: 8px;
+    left: 6px;
+    bottom: 6px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 20px;
+}
+
+.search-form__checkbox:checked+.search-form__slider {
+    background-color: #3DDC84;
+}
+
+.search-form__checkbox:checked+.search-form__slider:before {
+    transform: translateX(16px);
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+}
+
+.search-form__error {
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+    color: #EE3465;
+    margin-left: 10px;
+    max-width: 375px;
+    min-height: 14px;
+    max-width: 1140px;
+    visibility: hidden;
+    text-align: center;
+}
+
+.search-form__error_visible {
+    visibility: visible;
+}
+
+@media screen and (max-width: 1279px) {
+    .search-form {
+        width: 708px;
+        margin: 80px 0 47px 0;
+    }
+
+    .search-form__input-part {
+        display: flex;
+        align-items: center;
+        border-right: 1px #424242 solid;
+        padding-right: 19px;
+        margin-right: 19px;
+    }
+
+    .search-form__input {
+        width: 338px;
+    }
+
+    .search-form__error {
+        max-width: 708px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .search-form {
+        background: transparent;
+        margin-bottom: 17px;
+    }
+
+    .search-form {
+        flex-wrap: wrap;
+        width: 300px;
+        justify-content: center;
+    }
+
+    .search-form__search-icon {
+        display: none;
+    }
+
+    .search-form__input {
+        width: 182px;
+        margin-left: 0;
+        font-size: 14px;
+        margin-left: 0;
+    }
+
+    .search-form__input-part {
+        border-right: none;
+        padding: 19px;
+        margin-right: 0;
+        background: #2F2F2F;
+        border-radius: 9px;
+    }
+
+    .search-form__switcher-part {
+        width: 148px;
+        margin-top: 45px;
+    }
+
+    .search-form__slider-label {
+        margin-left: 13px;
+        font-size: 11px;
+    }
+
+    .search-form__error {
+        font-size: 12px;
+        line-height: 12px;
+        max-width: 292px;
+        min-height: 12px;
+    }
+}
