@@ -191,14 +191,20 @@ function Movies() {
     };
 
     const handleChangeMovieSavingStatus = (movie, isSaved) => {
+        let savedMovieForRemove;
+        savedMoviesArray.forEach((savedMovie) => {
+            if (savedMovie.movieId === movie.id) {
+                savedMovieForRemove = savedMovie;
+            }
+        });
+
         if (isSaved) {
-            mainApi.deleteSavedMovie(movie.id).then((deletedMovie) => {
+            mainApi.deleteSavedMovie(savedMovieForRemove._id).then((deletedMovie) => {
                 handleGetSavedMovies();
             }).catch((err) => {
                 console.log(err);
             });
         } else {
-            console.log(movie + "   " + isSaved);
             mainApi.postSavedMovie({
                 country: movie.country,
                 director: movie.director,
@@ -264,7 +270,7 @@ function Movies() {
             <HorizontalSeparator />
             {moviesArray && (
                 <>
-                    <MoviesCardList moviesArray={moviesArray} isLoading={isLoading} isDataRecieved={isDataRecieved} currentMoviesAmount={currentMoviesAmount} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} />
+                    <MoviesCardList moviesArray={moviesArray} isLoading={isLoading} isDataRecieved={isDataRecieved} currentMoviesAmount={currentMoviesAmount} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} isMainMoviePage={true} />
                     <MoreButton moviesArray={moviesArray} currentMoviesAmount={currentMoviesAmount} onChangeCurrentMoviesAmount={handleChangeCurrentMoviesAmount} isDataRecieved={isDataRecieved} />
                 </>)}
         </div>

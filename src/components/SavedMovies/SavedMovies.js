@@ -1,66 +1,37 @@
-import MoreButton from '../MoreButton/MoreButton';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
-import poster from '../../images/poster.png';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import HorizontalSeparator from '../HorizontalSeparator/HorizontalSeparator';
+import { useState } from 'react';
 
 function SavedMovies() {
-    const moviesArray = [{
-        id: 1,
-        name: '33 слова о дизайне',
-        time: '1ч 47м',
-        poster: poster,
-        isSavedForCurrentUser: true
-    },
-    {
-        id: 2,
-        name: '33 слова о дизайне',
-        time: '1ч 47м',
-        poster: poster,
-        isSavedForCurrentUser: true
-    },
-    {
-        id: 3,
-        name: '33 слова о дизайне',
-        time: '1ч 47м',
-        poster: poster,
-        isSavedForCurrentUser: false
-    },
-    {
-        id: 4,
-        name: '33 слова о дизайне',
-        time: '1ч 47м',
-        poster: poster,
-        isSavedForCurrentUser: false
-    },
-    {
-        id: 5,
-        name: '33 слова о дизайне',
-        time: '1ч 47м',
-        poster: poster,
-        isSavedForCurrentUser: false
-    },
-    {
-        id: 6,
-        name: '33 слова о дизайне',
-        time: '1ч 47м',
-        poster: poster,
-        isSavedForCurrentUser: true
-    },
-    {
-        id: 7,
-        name: '33 слова о дизайне',
-        time: '1ч 47м',
-        poster: poster,
-        isSavedForCurrentUser: false
-    },
-    ];
+    const [isDataRecieved, setIsDataRecieved] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+    const [savedMoviesArray, setSavedMoviesArray] = useState(JSON.parse(localStorage.getItem("savedMovies")));
+
+    const handleChangeIsLoading = (isLoading) => {
+        setIsLoading(isLoading);
+    };
+
+    const handleChangeIsDataRecieved = (isDataRecieved) => {
+        setIsDataRecieved(isDataRecieved);
+    };
+
+    const handleChangeMovieSavingStatus = () => {
+
+    };
+
+    const handleGetMoviesArray = () => {
+        setSavedMoviesArray(localStorage.getItem("savedMovies"));
+    };
+
     return (
         <div className="saved-movies">
-            <SearchForm />
+            <SearchForm handleGetMoviesArray={handleGetMoviesArray} onLoad={handleChangeIsLoading} onDataReceive={handleChangeIsDataRecieved}/>
             <HorizontalSeparator />
-            <MoviesCardList moviesArray={ moviesArray } isUserPage={ true }/>
+            {savedMoviesArray && (
+                <MoviesCardList moviesArray={savedMoviesArray} isLoading={isLoading} isDataRecieved={isDataRecieved} currentMoviesAmount={undefined} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} isMainMoviePage={false} />
+            )}
         </div>
     );
 }

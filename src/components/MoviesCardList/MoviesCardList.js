@@ -2,7 +2,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
 
-function MoviesCardList({ moviesArray, isLoading, isDataRecieved, currentMoviesAmount, handleChangeMovieSavingStatus, savedMoviesArray }) {
+function MoviesCardList({ moviesArray, isLoading, isDataRecieved, currentMoviesAmount, handleChangeMovieSavingStatus, savedMoviesArray, isMainMoviePage }) {
 
     if (isLoading) {
         return (
@@ -17,12 +17,11 @@ function MoviesCardList({ moviesArray, isLoading, isDataRecieved, currentMoviesA
     }
 
     if (isDataRecieved) {
-        console.log(moviesArray);
         return (
             <>
                 <ul className="movies-card-list">
                     {moviesArray.slice(0, currentMoviesAmount).map((movie, i) => {
-                        return <MoviesCard key={movie.id} movie={movie} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} />
+                        return <MoviesCard key={i} movie={movie} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} />
                     })
                     }
                 </ul>

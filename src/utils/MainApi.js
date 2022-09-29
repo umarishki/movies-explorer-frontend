@@ -6,7 +6,7 @@ export class Api {
 
     async _request (methodApi, urlApi, dataObj) {
         // const token = this._getAuthToken();
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzM1YmZmMDNmZGRhODNjOTlhZjBkMzAiLCJpYXQiOjE2NjQ0NjY5NDAsImV4cCI6MTY2NDQ3NDE0MH0.QojTDUABTUB8U868sBQb38Kfr-0szXAZulNMvgULKRw';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzM1YmZmMDNmZGRhODNjOTlhZjBkMzAiLCJpYXQiOjE2NjQ0NzIxMDAsImV4cCI6MTY2NDQ3OTMwMH0.mmehXu2Wi_UGu31Ka-ZdUStEbASCNkTFOWYdRK0-xro';
     
         if (token) {
             this._headers['authorization'] = `Bearer ${token}`;

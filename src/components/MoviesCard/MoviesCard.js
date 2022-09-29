@@ -33,7 +33,7 @@ function MoviesCard({ movie, handleChangeMovieSavingStatus, savedMoviesArray }) 
                     </button>
                     <p className="movies-card__time">{getDuration()}</p>
                 </div>
-                <img className="movies-card__image" src={"https://api.nomoreparties.co/" + movie.image.url} alt="Фото: постер фильма" />
+                <img className="movies-card__image" src={isUserPage ? movie.image : "https://api.nomoreparties.co/" + movie.image.url} alt="Фото: постер фильма" />
             </a>
         </li>
     );
