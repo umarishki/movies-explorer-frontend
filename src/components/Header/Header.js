@@ -3,7 +3,6 @@ import { Route, Switch, useLocation } from 'react-router-dom';
 import NavigationWithInnerMenu from '../NavigationWithInnerMenu/NavigationWithInnerMenu';
 import './Header.css';
 import Logo from '../Logo/Logo';
-// import { useLocation } from 'react-router-';
 
 function Header({ onBurgerMenuClick, navigationListForInnerMenu, navigationListForMainPage }) {
     const location = useLocation();

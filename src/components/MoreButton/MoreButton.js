@@ -1,10 +1,11 @@
 import './MoreButton.css';
 
-function MoreButton({ moviesArray }) {
-    if (moviesArray.length > 3) {
+function MoreButton({ moviesArray, currentMoviesAmount, onChangeCurrentMoviesAmount, isDataRecieved }) {
+
+    if (moviesArray.length > currentMoviesAmount && isDataRecieved) {
         return (
             <div className="more-button__container">
-                <button className="more-button__button" type="button">Еще</button>
+                <button className="more-button__button" type="button" onClick={onChangeCurrentMoviesAmount}>Еще</button>
             </div>
         );
     };
