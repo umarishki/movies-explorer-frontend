@@ -2,8 +2,8 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
 
-function MoviesCardList({ moviesArray, isLoading, isDataRecieved, currentMoviesAmount, handleChangeMovieSavingStatus, savedMoviesArray, isMainMoviePage }) {
-
+function MoviesCardList({ moviesArray, isLoading, isDataRecieved, currentMoviesAmount, handleChangeMovieSavingStatus, savedMoviesArray }) {
+    console.log(isLoading);
     if (isLoading) {
         return (
             <Preloader />
@@ -21,7 +21,7 @@ function MoviesCardList({ moviesArray, isLoading, isDataRecieved, currentMoviesA
             <>
                 <ul className="movies-card-list">
                     {moviesArray.slice(0, currentMoviesAmount).map((movie, i) => {
-                        return <MoviesCard key={i} movie={movie} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} />
+                        return <MoviesCard key={i} movie={movie} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray}/>
                     })
                     }
                 </ul>

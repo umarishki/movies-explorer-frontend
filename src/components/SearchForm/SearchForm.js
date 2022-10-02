@@ -3,7 +3,7 @@ import searchIcon from '../../images/search-icon.svg';
 import searchButton from '../../images/search-button.svg';
 import { useState } from 'react';
 
-function SearchForm({ handleGetMoviesArray, onLoad, onDataReceive }) {
+function SearchForm({ handleGetMoviesArray, handleChangeIsLoading, onDataReceive, handleBadTokenLogOut }) {
     
     const [searchFormValue, setsearchFormValue] = useState('');
     const [isShortMoviesIncluded, setIsShortMoviesIncluded] = useState(false);
@@ -22,15 +22,17 @@ function SearchForm({ handleGetMoviesArray, onLoad, onDataReceive }) {
             return setError('Нужно ввести ключевое слово');
         }
 
-        onLoad(true);
+        handleChangeIsLoading(true);
 
         localStorage.setItem('searchData', searchFormValue);
         localStorage.setItem('isShortMoviesIncluded', isShortMoviesIncluded);
 
         handleGetMoviesArray().catch((err) => {
+            handleBadTokenLogOut();
             setError(err.message);
-            onLoad(false);
+            handleChangeIsLoading(false);
         });
+        setTimeout(() => handleChangeIsLoading(false), 1000);
     }
 
     const handleChangeSwitcher = () => {

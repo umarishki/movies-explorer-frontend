@@ -7,7 +7,7 @@ import './MoviesCard.css';
 function MoviesCard({ movie, handleChangeMovieSavingStatus, savedMoviesArray }) {
     const location = useLocation();
     const isUserPage = location.pathname === "/saved-movies";
-    const isSaved = savedMoviesArray.some(m => m.movieId === movie.id);
+    const isSaved = isUserPage ? true : savedMoviesArray.some(m => m.movieId === movie.id);
 
     const getDuration = () => {
         if (movie.duration % 60 === 0) {
@@ -20,7 +20,10 @@ function MoviesCard({ movie, handleChangeMovieSavingStatus, savedMoviesArray }) 
     const onChangeMovieSavingStatus = (e) => {
         e.stopPropagation();
         e.preventDefault();
+
         handleChangeMovieSavingStatus(movie, isSaved);
+        console.log(movie);
+        console.log(isSaved);
     };
 
     return (

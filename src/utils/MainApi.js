@@ -5,8 +5,7 @@ export class Api {
     }
 
     async _request (methodApi, urlApi, dataObj) {
-        // const token = this._getAuthToken();
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzM1YmZmMDNmZGRhODNjOTlhZjBkMzAiLCJpYXQiOjE2NjQ0NzIxMDAsImV4cCI6MTY2NDQ3OTMwMH0.mmehXu2Wi_UGu31Ka-ZdUStEbASCNkTFOWYdRK0-xro';
+        const token = this._getAuthToken();
     
         if (token) {
             this._headers['authorization'] = `Bearer ${token}`;
@@ -28,9 +27,9 @@ export class Api {
             return data;
     };
     
-    // _getAuthToken() {
-    //     return localStorage.getItem('token');
-    // }
+    _getAuthToken() {
+        return localStorage.getItem('token');
+    }
 
     getSavedMovies() {
         return this._request(
@@ -57,24 +56,26 @@ export class Api {
         );
     }
 
-
-
-
-
-
-    putLike(cardId) {
+    postUser({ email, password, name }) {
         return this._request(
-            'PUT',
-            `cards/${cardId}/likes`,
-            undefined
+            'POST',
+            'signup',
+            {
+                email: email,
+                password: password,
+                name: name
+            }
         );
     }
 
-    deleteLike(cardId) {
+    postUserAuth({ email, password }) {
         return this._request(
-            'DELETE',
-            `cards/${cardId}/likes`,
-            undefined
+            'POST',
+            'signin',
+            {
+                password: password,
+                email: email 
+            }
         );
     }
 
@@ -87,45 +88,13 @@ export class Api {
     }
 
     patchProfileInfo(data) {
-        const { name, about } = data;
+        const { name, email } = data;
         return this._request(
             'PATCH',
             'users/me',
             {
                 name: name,
-                about: about
-            }
-        );
-    }
-
-    patchProfileAvatar({ avatar }) {
-        return this._request(
-            'PATCH',
-            'users/me/avatar',
-            {
-                avatar: avatar,
-            }
-        );
-    }
-
-    postUser({ password, email }) {
-        return this._request(
-            'POST',
-            'signup',
-            {
-                password: password,
                 email: email
-            }
-        );
-    }
-
-    postUserAuth({ password, email }) {
-        return this._request(
-            'POST',
-            'signin',
-            {
-                password: password,
-                email: email 
             }
         );
     }

@@ -5,16 +5,13 @@ import MoreButton from '../MoreButton/MoreButton';
 import { getMovies } from '../../utils/MoviesApi';
 import poster from '../../images/poster.png';
 import './Movies.css';
-import { mainApi } from '../../utils/MainApi';
 import React, { useEffect, useState } from 'react';
 
-function Movies() {
-    const [isDataRecieved, setIsDataRecieved] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+function Movies({ savedMoviesArray, handleGetSavedMovies, handleChangeMovieSavingStatus, handleChangeIsLoading, isLoading, handleBadTokenLogOut }) {
     const [currentMoviesAmount, setCurrentMoviesAmount] = useState(0);
     const [moviesArray, setMoviesArray] = useState(null);
-    const [savedMoviesArray, setSavedMoviesArray] = useState(null);
     const [moviesDisplaySettings, setMoviesDisplaySettings] = useState({ initilalAmount: 0, increment: 0 });
+    const [isDataRecieved, setIsDataRecieved] = useState(false);
 
     const moviesArrayTest = [{
         id: 1,
@@ -148,16 +145,17 @@ function Movies() {
         console.log("Ширина экрана:: " + window.innerWidth + " | " + "Начальное: " + moviesDisplaySettings.initilalAmount + " | " + "Инкремент: " + moviesDisplaySettings.increment);
     };
 
-    const handleGetMoviesArray = () => {
+    const handleGetAllMoviesArray = () => {
+        console.log(isLoading);
         return getMovies().then((movies) => {
-            setIsLoading(false);
             if (!movies) {
                 throw new Error('Ничего не найдено');
             }
             localStorage.setItem('movies', JSON.stringify(movies));
-            handleSearchChanges(movies);
+            setCurrentMoviesAmount(moviesDisplaySettings.initilalAmount);
+            setMoviesArray(movies);
             setIsDataRecieved(true);
-        })
+        });
     };
 
     const handleChangeCurrentMoviesAmount = () => {
@@ -177,69 +175,14 @@ function Movies() {
         console.log(currentMoviesAmount);
     }
 
-    const handleChangeIsLoading = (isLoading) => {
-        setIsLoading(isLoading);
-    };
-
     const handleChangeIsDataRecieved = (isDataRecieved) => {
         setIsDataRecieved(isDataRecieved);
     };
 
-    const handleSearchChanges = (moviesArrayTest) => {
-        setCurrentMoviesAmount(moviesDisplaySettings.initilalAmount);
-        setMoviesArray(moviesArrayTest);
-    };
-
-    const handleChangeMovieSavingStatus = (movie, isSaved) => {
-        let savedMovieForRemove;
-        savedMoviesArray.forEach((savedMovie) => {
-            if (savedMovie.movieId === movie.id) {
-                savedMovieForRemove = savedMovie;
-            }
-        });
-
-        if (isSaved) {
-            mainApi.deleteSavedMovie(savedMovieForRemove._id).then((deletedMovie) => {
-                handleGetSavedMovies();
-            }).catch((err) => {
-                console.log(err);
-            });
-        } else {
-            mainApi.postSavedMovie({
-                country: movie.country,
-                director: movie.director,
-                duration: movie.duration,
-                year: movie.year,
-                description: movie.description,
-                image: "https://api.nomoreparties.co/" + movie.image.url,
-                trailerLink: movie.trailerLink,
-                thumbnail: "https://api.nomoreparties.co/" + movie.image.formats.thumbnail.url,
-                movieId: movie.id,
-                nameRU: movie.nameRU,
-                nameEN: movie.nameEN
-            }).then((savedMovie) => {
-                if (!savedMovie) {
-                    throw new Error('Сохраненный фильм не найден');
-                }
-                handleGetSavedMovies();
-            }).catch((err) => {
-                console.log(err);
-            });
-        }
-    }
-
-    const handleGetSavedMovies = () => {
-        mainApi.getSavedMovies().then((savedMovies) => {
-            if (!savedMovies) {
-                throw new Error('Сохраненные файлы не найдены');
-            }
-            localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
-            setSavedMoviesArray(savedMovies);
-        }).catch((err) => {
-            console.log(err);
-        });
-        console.log(savedMoviesArray);
-    }
+    // const handleSearchChanges = (moviesArrayTest) => {
+    //     setCurrentMoviesAmount(moviesDisplaySettings.initilalAmount);
+    //     setMoviesArray(moviesArrayTest);
+    // };
 
     // useEffect(() => {
     //     handleGetSavedMovies();
@@ -247,7 +190,9 @@ function Movies() {
 
     useEffect(() => {
         handleChangeMoviesSettings();
-        handleGetSavedMovies();
+        handleGetSavedMovies().catch((err) => {
+            console.log(err);
+        });
     }, [isDataRecieved]);
 
     useEffect(() => {
@@ -266,12 +211,12 @@ function Movies() {
 
     return (
         <div className="movies">
-            <SearchForm handleGetMoviesArray={handleGetMoviesArray} onLoad={handleChangeIsLoading} onDataReceive={handleChangeIsDataRecieved} />
+            <SearchForm handleGetMoviesArray={handleGetAllMoviesArray} handleChangeIsLoading={handleChangeIsLoading} onDataReceive={handleChangeIsDataRecieved} handleBadTokenLogOut={handleBadTokenLogOut} />
             <HorizontalSeparator />
             {moviesArray && (
                 <>
-                    <MoviesCardList moviesArray={moviesArray} isLoading={isLoading} isDataRecieved={isDataRecieved} currentMoviesAmount={currentMoviesAmount} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} isMainMoviePage={true} />
-                    <MoreButton moviesArray={moviesArray} currentMoviesAmount={currentMoviesAmount} onChangeCurrentMoviesAmount={handleChangeCurrentMoviesAmount} isDataRecieved={isDataRecieved} />
+                    <MoviesCardList moviesArray={moviesArray} isLoading={isLoading} isDataRecieved={isDataRecieved} currentMoviesAmount={currentMoviesAmount} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} />
+                    <MoreButton moviesArray={moviesArray} currentMoviesAmount={currentMoviesAmount} onChangeCurrentMoviesAmount={handleChangeCurrentMoviesAmount} isDataRecieved={isDataRecieved} isLoading={isLoading}/>
                 </>)}
         </div>
     );
