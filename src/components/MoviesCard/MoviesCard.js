@@ -10,7 +10,9 @@ function MoviesCard({ movie, handleChangeMovieSavingStatus, savedMoviesArray }) 
     const isSaved = isUserPage ? true : savedMoviesArray.some(m => m.movieId === movie.id);
 
     const getDuration = () => {
-        if (movie.duration % 60 === 0) {
+        if (movie.duration < 60) {
+            return (movie.duration + "м");
+        } else if (movie.duration % 60 === 0) {
             return (movie.duration / 60 + "ч");
         } else {
             return ((movie.duration - (movie.duration % 60)) / 60 + "ч " + (movie.duration % 60) + "м");
@@ -22,8 +24,6 @@ function MoviesCard({ movie, handleChangeMovieSavingStatus, savedMoviesArray }) 
         e.preventDefault();
 
         handleChangeMovieSavingStatus(movie, isSaved);
-        console.log(movie);
-        console.log(isSaved);
     };
 
     return (

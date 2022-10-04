@@ -2,11 +2,23 @@ import './SearchForm.css';
 import searchIcon from '../../images/search-icon.svg';
 import searchButton from '../../images/search-button.svg';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 function SearchForm({ handleGetMoviesArray, handleChangeIsLoading, onDataReceive, handleBadTokenLogOut }) {
     
-    const [searchFormValue, setsearchFormValue] = useState('');
-    const [isShortMoviesIncluded, setIsShortMoviesIncluded] = useState(false);
+    const location = useLocation();
+    const isUserPage = location.pathname === "/saved-movies";
+
+    const getSerchTextValue = () => {
+        if (isUserPage) {
+            return {searchSavedMovies: localStorage.getItem('searchSavedMovies') || '', isShortMoviesIncluded: localStorage.getItem('isShortSavedMoviesIncluded') === "true" ? true : false};
+        } else {
+            return {searchSavedMovies: localStorage.getItem('searchMovies') || '', isShortMoviesIncluded: localStorage.getItem('isShortMoviesIncluded') === "true" ? true : false};
+        }
+    };
+
+    const [searchFormValue, setsearchFormValue] = useState(getSerchTextValue().searchSavedMovies);
+    const [isShortMoviesIncluded, setIsShortMoviesIncluded] = useState(getSerchTextValue().isShortMoviesIncluded);
     const [error, setError] = useState('');
 
     const handleChangeInput = (e) => {
@@ -24,10 +36,7 @@ function SearchForm({ handleGetMoviesArray, handleChangeIsLoading, onDataReceive
 
         handleChangeIsLoading(true);
 
-        localStorage.setItem('searchData', searchFormValue);
-        localStorage.setItem('isShortMoviesIncluded', isShortMoviesIncluded);
-
-        handleGetMoviesArray().catch((err) => {
+        handleGetMoviesArray(searchFormValue.trim(), isShortMoviesIncluded).catch((err) => {
             handleBadTokenLogOut();
             setError(err.message);
             handleChangeIsLoading(false);
@@ -66,8 +75,8 @@ function SearchForm({ handleGetMoviesArray, handleChangeIsLoading, onDataReceive
                             type="checkbox"
                             name="short-movies-switcher"
                             id="search-form-checkbox-input"
-                            value={false}
                             onChange={handleChangeSwitcher}
+                            checked={isShortMoviesIncluded}
                         />
                         <span className="search-form__slider"></span>
                     </label>

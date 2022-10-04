@@ -4,8 +4,12 @@ import PageWithForm from '../PageWithForm/PageWithForm';
 import FormButton from '../FormButton/FormButton';
 import FormError from '../FormError/FormError';
 import FormFieldsForProfile from '../FormFieldsForProfile/FormFieldsForProfile';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { useContext } from 'react';
 
-function Profile({ currentUser, handleUpdateUserInfo }) {
+function Profile({ handleUpdateUserInfo, handleLogOut }) {
+
+    const currentUser = useContext(CurrentUserContext);
 
     const [isEditProcess, setIsEditProcess] = useState(false);
     const [formValues, setFormValues] = useState({ email: '', name: '' });
@@ -69,7 +73,7 @@ function Profile({ currentUser, handleUpdateUserInfo }) {
                                         <button className="profile__link-button" type="button" onClick={handleEditButtonClick}>Редактировать</button>
                                     </li>
                                     <li className="profile__list-item">
-                                        <button className="profile__link-button" type="button">Выйти из аккаунта</button>
+                                        <button className="profile__link-button" type="button" onClick={handleLogOut}>Выйти из аккаунта</button>
                                     </li>
                                 </ul>
                             </>

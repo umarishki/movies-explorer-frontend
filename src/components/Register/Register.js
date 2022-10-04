@@ -33,7 +33,7 @@ function Register({ handleRegister }) {
                     <FormFieldsWithInput subtitle={"Имя"} placeholder={"Введите имя"} name="name" value={formValues.name} handleChange={handleChange} errorText={" "}/>
                     <FormFieldsWithInput subtitle={"E-mail"} placeholder={"Введите E-mail"} name="email" value={formValues.email} handleChange={handleChange} errorText={" "}/>
                     <FormFieldsWithInput subtitle={"Пароль"} placeholder={"Введите пароль"} name="password" value={formValues.password} handleChange={handleChange} errorText={" "}/>
-                    <FormError errorText="ejhrwjkhrwkjhrkwejrhkw" />
+                    <FormError errorText={errorText} />
                 </div>
             </PageWithForm>
         </div>

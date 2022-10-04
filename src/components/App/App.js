@@ -1,4 +1,4 @@
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Redirect, Route, Switch, useHistory } from 'react-router-dom';
 import Movies from '../Movies/Movies';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
@@ -11,14 +11,20 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFoundPage from '../NotFoundPage/NotFoundPage';
 import { mainApi } from '../../utils/MainApi';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { filterMovies } from '../../utils/filter';
 
 function App() {
 
   const [isPopupOpened, setIsPopupOpened] = useState(false);
-  const [savedMoviesArray, setSavedMoviesArray] = useState(JSON.parse(localStorage.getItem("savedMovies")));
+  const [savedMoviesArray, setSavedMoviesArray] = useState(JSON.parse(localStorage.getItem("savedMoviesAfterFilter")));
   const [isDataRecieved, setIsDataRecieved] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState({});
+
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isTokenCheckLoading, setIsTokenCheckLoading] = useState(true);
 
   const history = useHistory();
 
@@ -75,13 +81,6 @@ function App() {
     tokenCheck();
   }, []);
 
-  //   useEffect(() => {
-  //     if (loggedIn) {
-  //         history.push("/");
-  //     }
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [loggedIn]);
-
   const handleChangeIsDataRecieved = (isDataRecieved) => {
     setIsDataRecieved(isDataRecieved);
   };
@@ -94,14 +93,32 @@ function App() {
     setIsPopupOpened(false);
   }
 
-  const handleGetSavedMovies = () => {
+  const handleGetSavedMovies = (searchValue, isShortMoviesIncluded) => {
     return mainApi.getSavedMovies().then((savedMovies) => {
       if (!savedMovies) {
         throw new Error('Сохраненные файлы не найдены');
       }
-      localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+
+      const savedMoviesAfterFilter = filterMovies(searchValue, isShortMoviesIncluded, savedMovies);
+
+      localStorage.setItem('savedMoviesAfterFilter', JSON.stringify(savedMoviesAfterFilter));
+      localStorage.setItem('searchSavedMovies', searchValue);
+      localStorage.setItem('isShortSavedMoviesIncluded', isShortMoviesIncluded);
+
+      setSavedMoviesArray(savedMoviesAfterFilter);
+      setIsDataRecieved(true);
+    });
+  };
+
+  const handleGetAllSavedMovies = () => {
+    mainApi.getSavedMovies().then((savedMovies) => {
+      if (!savedMovies) {
+        throw new Error('Сохраненные файлы не найдены');
+      }
       setSavedMoviesArray(savedMovies);
       setIsDataRecieved(true);
+    }).catch((err) => {
+      console.log(err);
     });
   }
 
@@ -125,9 +142,7 @@ function App() {
 
   const handleDeleteSavedMovie = (id) => {
     mainApi.deleteSavedMovie(id).then((deletedMovie) => {
-      handleGetSavedMovies().catch((err) => {
-        console.log(err);
-      });;
+      handleGetAllSavedMovies();
     }).catch((err) => {
       handleBadTokenLogOut();
       console.log(err);
@@ -148,9 +163,7 @@ function App() {
       nameRU: movie.nameRU,
       nameEN: movie.nameEN
     }).then((savedMovie) => {
-      handleGetSavedMovies().catch((err) => {
-        console.log(err);
-      });
+      handleGetAllSavedMovies();
     }).catch((err) => {
       handleBadTokenLogOut();
       console.log(err);
@@ -163,7 +176,6 @@ function App() {
         throw new Error('Пользователь не найден');
       }
       setUserData(user);
-      console.log(user);
     });
   };
 
@@ -178,8 +190,8 @@ function App() {
   const handleLogin = ({ email, password }) => {
     return mainApi.postUserAuth({ email: email, password: password }).then((res) => {
       if (res) {
-        console.log(res);
         localStorage.setItem('token', res.data);
+        setIsTokenCheckLoading(true);
         tokenCheck();
         history.push('/movies');
       }
@@ -196,55 +208,71 @@ function App() {
               email: res.email,
               name: res.name
             }
+            setLoggedIn(true);
             setUserData(userData);
+            setIsTokenCheckLoading(false);
           }
         })
         .catch((err) => {
-          handleBadTokenLogOut();
+          handleBadTokenLogOut(err);
           console.log(err);
         });
-    };
+    }
+    else {
+      setIsTokenCheckLoading(false);
+    }
   };
 
   const handleLogOut = () => {
     localStorage.removeItem('token');
     setUserData(null);
-    history.push('/signin');
-}
+    setIsTokenCheckLoading(false);
+    setLoggedIn(false);
+    history.push('/');
+  }
 
   const handleBadTokenLogOut = (err) => {
     if (err.status === 401) {
-        handleLogOut();
+      handleLogOut();
     }
-}
+  }
+
+  if (isTokenCheckLoading) {
+    return <></>;
+  }
 
   return (
-    <>
+    <CurrentUserContext.Provider value={userData}>
       <Header
         onBurgerMenuClick={handleBurgerMenuClick}
         navigationListForInnerMenu={navigationListForInnerMenu}
         navigationListForMainPage={navigationListForMainPage}
+        loggedIn={loggedIn}
+        isTokenCheckLoading={isTokenCheckLoading}
       />
       <Switch>
-        <Route exact path='/movies' >
-          <Movies savedMoviesArray={savedMoviesArray} handleGetSavedMovies={handleGetSavedMovies} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} handleChangeIsLoading={setIsLoading} isLoading={isLoading} handleBadTokenLogOut={handleBadTokenLogOut} />
-        </Route>
-        <Route exact path="/saved-movies">
+        <ProtectedRoute exact path='/movies' loggedIn={loggedIn}>
+          <Movies savedMoviesArray={savedMoviesArray} handleGetAllSavedMovies={handleGetAllSavedMovies} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} handleChangeIsLoading={setIsLoading} isLoading={isLoading} handleBadTokenLogOut={handleBadTokenLogOut} />
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/saved-movies" loggedIn={loggedIn}>
           <SavedMovies savedMoviesArray={savedMoviesArray} handleGetSavedMovies={handleGetSavedMovies} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} handleChangeIsDataRecieved={handleChangeIsDataRecieved} isDataRecieved={isDataRecieved} handleChangeIsLoading={setIsLoading} isLoading={isLoading} handleBadTokenLogOut={handleBadTokenLogOut} />
-        </Route>
-        <Route exact path="/profile">
-          <Profile currentUser={userData} handleUpdateUserInfo={handleUpdateUserInfo} />
-        </Route>
+        </ProtectedRoute>
+        <ProtectedRoute exact path="/profile" loggedIn={loggedIn}>
+          <Profile handleUpdateUserInfo={handleUpdateUserInfo} handleLogOut={handleLogOut} />
+        </ProtectedRoute>
         <Route path="/signin">
+          {loggedIn && <Redirect to="/movies" />}
           <Login handleLogin={handleLogin} />
         </Route>
         <Route path="/signup">
+          {loggedIn && <Redirect to="/movies" />}
           <Register handleRegister={handleRegister} />
         </Route>
         <Route exact path="/">
           <Main />
         </Route>
         <Route path="*">
+          {!loggedIn && <Redirect to="/signin" />}
           <NotFoundPage />
         </Route>
       </Switch>
@@ -254,8 +282,7 @@ function App() {
         onClose={handleCloseButtonClick}
         isOpened={isPopupOpened}
       />
-      {/* {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />} */}
-    </>
+    </CurrentUserContext.Provider>
   );
 }
 

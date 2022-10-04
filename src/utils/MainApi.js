@@ -17,12 +17,12 @@ export class Api {
             });
     
             if (!res.ok) {
-                Promise.reject({status: res.status, message: `Ошибка ${res.status}: ${res.statusText}`});
+                return Promise.reject({status: res.status, message: `Ошибка ${res.status}: ${res.statusText}`});
             }
     
             const data = await res.json();
             if (!data) {
-                throw new Error('Ничего не найдено');
+                return Promise.reject({status: res.status, message: `Ошибка ${res.status}: ${res.statusText}`});
             }
             return data;
     };
@@ -40,7 +40,6 @@ export class Api {
     }
 
     postSavedMovie(data) {
-        console.log(data);
         return this._request(
             'POST',
             'movies',
