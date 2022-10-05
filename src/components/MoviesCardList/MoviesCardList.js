@@ -1,13 +1,8 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader';
 import './MoviesCardList.css';
 
 function MoviesCardList({ moviesArray, isLoading, isDataRecieved, currentMoviesAmount, handleChangeMovieSavingStatus, savedMoviesArray }) {
-    
-    const location = useLocation();
-    const isUserPage = location.pathname === "/saved-movies";
 
     if (isLoading) {
         return (

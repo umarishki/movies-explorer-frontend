@@ -18,7 +18,8 @@ import { filterMovies } from '../../utils/filter';
 function App() {
 
   const [isPopupOpened, setIsPopupOpened] = useState(false);
-  const [savedMoviesArray, setSavedMoviesArray] = useState(JSON.parse(localStorage.getItem("savedMoviesAfterFilter")));
+  const [savedMoviesAfterFilter, setSavedMoviesAfterFilter] = useState(JSON.parse(localStorage.getItem("savedMoviesAfterFilter")));
+  const [savedMoviesArray, setSavedMoviesArray] = useState([]);
   const [isDataRecieved, setIsDataRecieved] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState({});
@@ -105,7 +106,7 @@ function App() {
       localStorage.setItem('searchSavedMovies', searchValue);
       localStorage.setItem('isShortSavedMoviesIncluded', isShortMoviesIncluded);
 
-      setSavedMoviesArray(savedMoviesAfterFilter);
+      setSavedMoviesAfterFilter(savedMoviesAfterFilter);
       setIsDataRecieved(true);
     });
   };
@@ -113,7 +114,7 @@ function App() {
   const handleGetAllSavedMovies = () => {
     mainApi.getSavedMovies().then((savedMovies) => {
       if (!savedMovies) {
-        throw new Error('Сохраненные файлы не найдены');
+        throw new Error('Сохраненные фильмы не найдены');
       }
       setSavedMoviesArray(savedMovies);
       setIsDataRecieved(true);
@@ -143,6 +144,10 @@ function App() {
   const handleDeleteSavedMovie = (id) => {
     mainApi.deleteSavedMovie(id).then((deletedMovie) => {
       handleGetAllSavedMovies();
+
+      const newArray = savedMoviesAfterFilter.filter((savedMovie) => savedMovie._id !== id);
+      setSavedMoviesAfterFilter(newArray);
+      localStorage.setItem('savedMoviesAfterFilter', JSON.stringify(newArray));
     }).catch((err) => {
       handleBadTokenLogOut();
       console.log(err);
@@ -229,6 +234,12 @@ function App() {
     setIsTokenCheckLoading(false);
     setLoggedIn(false);
     history.push('/');
+    localStorage.removeItem('savedMoviesAfterFilter');
+    localStorage.removeItem('searchSavedMovies');
+    localStorage.removeItem('isShortSavedMoviesIncluded');
+    localStorage.removeItem('movies');
+    localStorage.removeItem('searchMovies');
+    localStorage.removeItem('isShortMoviesIncluded');
   }
 
   const handleBadTokenLogOut = (err) => {
@@ -255,7 +266,7 @@ function App() {
           <Movies savedMoviesArray={savedMoviesArray} handleGetAllSavedMovies={handleGetAllSavedMovies} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} handleChangeIsLoading={setIsLoading} isLoading={isLoading} handleBadTokenLogOut={handleBadTokenLogOut} />
         </ProtectedRoute>
         <ProtectedRoute exact path="/saved-movies" loggedIn={loggedIn}>
-          <SavedMovies savedMoviesArray={savedMoviesArray} handleGetSavedMovies={handleGetSavedMovies} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} handleChangeIsDataRecieved={handleChangeIsDataRecieved} isDataRecieved={isDataRecieved} handleChangeIsLoading={setIsLoading} isLoading={isLoading} handleBadTokenLogOut={handleBadTokenLogOut} />
+          <SavedMovies savedMoviesArray={savedMoviesArray} savedMoviesAfterFilter={savedMoviesAfterFilter} handleGetSavedMovies={handleGetSavedMovies} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} handleChangeIsDataRecieved={handleChangeIsDataRecieved} isDataRecieved={isDataRecieved} handleChangeIsLoading={setIsLoading} isLoading={isLoading} handleBadTokenLogOut={handleBadTokenLogOut} />
         </ProtectedRoute>
         <ProtectedRoute exact path="/profile" loggedIn={loggedIn}>
           <Profile handleUpdateUserInfo={handleUpdateUserInfo} handleLogOut={handleLogOut} />
