@@ -1,5 +1,5 @@
 import './NotFoundPage.css';
-import { useHistory } from 'react-router-dom'; 
+import { useHistory } from 'react-router-dom';
 
 function NotFoundPage() {
     const history = useHistory();

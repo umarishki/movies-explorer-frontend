@@ -2,9 +2,6 @@ import { useCallback } from 'react';
 import { useState } from 'react';
 import { regexUserName } from '../../utils/utils';
 import isEmail from 'validator/es/lib/isEmail';
-import { useContext } from 'react';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { useEffect } from 'react';
 
 const Validation = () => {
 
@@ -12,16 +9,8 @@ const Validation = () => {
     const [errorMessages, setErrorMessages] = useState({ name: '', email: '', password: '' });
     const [isValid, setIsValid] = useState(false);
 
-    const currentUser = useContext(CurrentUserContext);
-
     const checkNameValidation = (e, value) => {
-        if (value === currentUser.name) {
-            setErrorMessages({
-                ...errorMessages,
-                'name': ''
-            });
-            setIsValid(false);
-        } else if (value.length === 0) {
+        if (value.length === 0) {
             setErrorMessages({
                 ...errorMessages,
                 'name': 'Имя должно быть введено обязательно'
@@ -55,13 +44,7 @@ const Validation = () => {
     };
 
     const checkEmailValidation = (e, value) => {
-        if (value === currentUser.email) {
-            setErrorMessages({
-                ...errorMessages,
-                'name': ''
-            });
-            setIsValid(false);
-        } else if (value.length === 0) {
+        if (value.length === 0) {
             setErrorMessages({
                 ...errorMessages,
                 'email': 'Электронная почта должна быть введена обязательно'
@@ -130,12 +113,6 @@ const Validation = () => {
     },
         [setFormValues, setErrorMessages, setIsValid]
     );
-
-    useEffect(() => {
-        if (formValues.name === currentUser.name || formValues.email === currentUser.email) {
-            setIsValid(false)
-        }
-    }, [formValues.name, formValues.email])
 
     return {
         formValues,

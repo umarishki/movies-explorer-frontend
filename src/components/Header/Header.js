@@ -1,10 +1,12 @@
 import Navigation from '../Navigation/Navigation';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import NavigationWithInnerMenu from '../NavigationWithInnerMenu/NavigationWithInnerMenu';
+import { navigationListForMainPage } from '../../utils/utils';
+import { navigationListForInnerMenu } from '../../utils/utils';
 import './Header.css';
 import Logo from '../Logo/Logo';
 
-function Header({ onBurgerMenuClick, navigationListForInnerMenu, navigationListForMainPage, loggedIn, isTokenCheckLoading }) {
+function Header({ onBurgerMenuClick, loggedIn, isTokenCheckLoading }) {
     const location = useLocation();
 
     if (isTokenCheckLoading) {

@@ -17,13 +17,13 @@ function Techs() {
                     classNameForParagraph={"text-block__paragraph_type_techs"}
                 />
                 <ul className="techs__labels">
-                <LabelTech labelText={"HTML"}/>
-                <LabelTech labelText={"CSS"}/>
-                <LabelTech labelText={"JS"}/>
-                <LabelTech labelText={"React"}/>
-                <LabelTech labelText={"Git"}/>
-                <LabelTech labelText={"Express.js"}/>
-                <LabelTech labelText={"mongoDB"}/>
+                    <LabelTech labelText={"HTML"} />
+                    <LabelTech labelText={"CSS"} />
+                    <LabelTech labelText={"JS"} />
+                    <LabelTech labelText={"React"} />
+                    <LabelTech labelText={"Git"} />
+                    <LabelTech labelText={"Express.js"} />
+                    <LabelTech labelText={"mongoDB"} />
                 </ul>
             </article>
         </section>

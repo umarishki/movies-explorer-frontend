@@ -5,7 +5,15 @@ function FormFieldsWithInput({ subtitle, placeholder, name, type, value, handleC
     return (
         <div className="form__fields-container">
             <p className="form__subtitle">{subtitle}</p>
-            <input className="form__input" placeholder={placeholder} value={value || ''} onChange={handleChange} type={type} name={name} required/>
+            <input
+                className="form__input"
+                placeholder={placeholder}
+                value={value || ''}
+                onChange={handleChange}
+                type={type}
+                name={name}
+                required
+            />
             <FormInputError errorText={errorText} />
         </div>
     );

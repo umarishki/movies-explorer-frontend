@@ -5,15 +5,15 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function SearchForm({ handleGetMoviesArray, handleChangeIsLoading, onDataReceive, handleBadTokenLogOut }) {
-    
+
     const location = useLocation();
     const isUserPage = location.pathname === "/saved-movies";
 
     const getSerchTextValue = () => {
         if (isUserPage) {
-            return {searchSavedMovies: localStorage.getItem('searchSavedMovies') || '', isShortMoviesIncluded: localStorage.getItem('isShortSavedMoviesIncluded') === "true" ? true : false};
+            return { searchSavedMovies: localStorage.getItem('searchSavedMovies') || '', isShortMoviesIncluded: localStorage.getItem('isShortSavedMoviesIncluded') === "true" ? true : false };
         } else {
-            return {searchSavedMovies: localStorage.getItem('searchMovies') || '', isShortMoviesIncluded: localStorage.getItem('isShortMoviesIncluded') === "true" ? true : false};
+            return { searchSavedMovies: localStorage.getItem('searchMovies') || '', isShortMoviesIncluded: localStorage.getItem('isShortMoviesIncluded') === "true" ? true : false };
         }
     };
 

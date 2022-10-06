@@ -3,7 +3,7 @@ import './FormInputError.css';
 function FormInputError({ errorText }) {
 
     return (
-        <span className="input-error">{ errorText }</span>
+        <span className="input-error">{errorText}</span>
     );
 }
 

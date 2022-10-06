@@ -21,8 +21,8 @@
     visibility: visible;
 }
 
-@media screen and (max-width: 767px) { 
+@media screen and (max-width: 767px) {
     .form-error {
         width: 260px;
-    } 
+    }
 }

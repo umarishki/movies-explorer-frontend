@@ -4,29 +4,29 @@ export class Api {
         this._headers = options.headers;
     }
 
-    async _request (methodApi, urlApi, dataObj) {
+    async _request(methodApi, urlApi, dataObj) {
         const token = this._getAuthToken();
-    
+
         if (token) {
             this._headers['authorization'] = `Bearer ${token}`;
         }
-            const res = await fetch(`${this._baseUrl}${urlApi}`, {
-                method: methodApi,
-                headers: this._headers,
-                body: dataObj ? JSON.stringify(dataObj) : undefined
-            });
-    
-            if (!res.ok) {
-                return Promise.reject({status: res.status, message: `Ошибка: ${res.message}`});
-            }
-    
-            const data = await res.json();
-            if (!data) {
-                return Promise.reject({status: res.status, message: `Ошибка: ${res.message}`});
-            }
-            return data;
+        const res = await fetch(`${this._baseUrl}${urlApi}`, {
+            method: methodApi,
+            headers: this._headers,
+            body: dataObj ? JSON.stringify(dataObj) : undefined
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            return Promise.reject({ status: res.status, message: `Ошибка: ${data.message}` });
+        }
+        if (!data) {
+            return Promise.reject({ status: res.status, message: `Ошибка: данные не получены с сервера` });
+        }
+        return data;
     };
-    
+
     _getAuthToken() {
         return localStorage.getItem('token');
     }
@@ -73,7 +73,7 @@ export class Api {
             'signin',
             {
                 password: password,
-                email: email 
+                email: email
             }
         );
     }

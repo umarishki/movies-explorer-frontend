@@ -7,10 +7,22 @@ function SavedMovies({ savedMoviesArray, savedMoviesAfterFilter, handleGetSavedM
 
     return (
         <div className="saved-movies">
-            <SearchForm handleGetMoviesArray={handleGetSavedMovies} handleChangeIsLoading={handleChangeIsLoading} onDataReceive={handleChangeIsDataRecieved} handleBadTokenLogOut={handleBadTokenLogOut}/>
+            <SearchForm
+                handleGetMoviesArray={handleGetSavedMovies}
+                handleChangeIsLoading={handleChangeIsLoading}
+                onDataReceive={handleChangeIsDataRecieved}
+                handleBadTokenLogOut={handleBadTokenLogOut}
+            />
             <HorizontalSeparator />
             {savedMoviesArray && (
-                <MoviesCardList moviesArray={savedMoviesAfterFilter || savedMoviesArray} isLoading={isLoading} isDataRecieved={isDataRecieved} currentMoviesAmount={savedMoviesAfterFilter ? savedMoviesAfterFilter.length : savedMoviesArray.length} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} />
+                <MoviesCardList
+                    moviesArray={savedMoviesAfterFilter || savedMoviesArray}
+                    isLoading={isLoading}
+                    isDataRecieved={isDataRecieved}
+                    currentMoviesAmount={savedMoviesAfterFilter ? savedMoviesAfterFilter.length : savedMoviesArray.length}
+                    handleChangeMovieSavingStatus={handleChangeMovieSavingStatus}
+                    savedMoviesArray={savedMoviesArray}
+                />
             )}
         </div>
     );

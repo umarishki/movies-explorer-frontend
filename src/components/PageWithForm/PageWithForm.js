@@ -10,15 +10,15 @@ function PageWithForm({ name, title, buttonTitle, text, link, textLink, handleSu
         <>
             <Switch>
                 <Route exact path="/profile">
-                    <form className="form form_centered" name={ name } onSubmit={handleSubmit}>
-                    <FormTitle title={title} />
+                    <form className="form form_centered" name={name} onSubmit={handleSubmit}>
+                        <FormTitle title={title} />
                         {children}
                     </form>
                 </Route>
                 <Route exact path="/*">
-                    <form className="form" name={ name } onSubmit={handleSubmit}>
-                    <Logo />
-                    <FormTitle title={title} />
+                    <form className="form" name={name} onSubmit={handleSubmit}>
+                        <Logo />
+                        <FormTitle title={title} />
                         {children}
                         <FormButton title={buttonTitle} isValid={isValid} />
                     </form>

@@ -8,26 +8,28 @@ import React, { useEffect, useState } from 'react';
 import { filterMovies } from '../../utils/filter';
 
 function Movies({ savedMoviesArray, handleGetAllSavedMovies, handleChangeMovieSavingStatus, handleChangeIsLoading, isLoading, handleBadTokenLogOut }) {
-    
+
     const [moviesArray, setMoviesArray] = useState(JSON.parse(localStorage.getItem('movies')) || null);
     const [moviesDisplaySettings, setMoviesDisplaySettings] = useState({ initilalAmount: 0, increment: 0 });
     const [currentMoviesAmount, setCurrentMoviesAmount] = useState(0);
     const [isDataRecieved, setIsDataRecieved] = useState(localStorage.getItem('movies') ? true : false);
 
-    useEffect(() => {
-        handleChangeMoviesSettings();
-    }, []);
-
     const handleChangeMoviesSettings = () => {
         if (window.innerWidth < 768) {
             setMoviesDisplaySettings({ initilalAmount: 5, increment: 2 });
-            currentMoviesAmount === 0 && setCurrentMoviesAmount(5);
+            if (!currentMoviesAmount) {
+                setCurrentMoviesAmount(5);
+            };
         } else if (window.innerWidth < 1280) {
             setMoviesDisplaySettings({ initilalAmount: 8, increment: 2 });
-            currentMoviesAmount === 0 && setCurrentMoviesAmount(8);
+            if (!currentMoviesAmount) {
+                setCurrentMoviesAmount(8);
+            };
         } else {
             setMoviesDisplaySettings({ initilalAmount: 12, increment: 3 });
-            currentMoviesAmount === 0 && setCurrentMoviesAmount(12);
+            if (!currentMoviesAmount) {
+                setCurrentMoviesAmount(12);
+            };
         }
     };
 
@@ -69,9 +71,9 @@ function Movies({ savedMoviesArray, handleGetAllSavedMovies, handleChangeMovieSa
         setIsDataRecieved(isDataRecieved);
     };
 
-    const handleChangeMoviesSettingsWithTimeout = () => {
-        const timeOut = setTimeout(handleChangeMoviesSettings, 5000);
-    }
+    useEffect(() => {
+        handleChangeMoviesSettings();
+    }, []);
 
     useEffect(() => {
         handleChangeMoviesSettings();
@@ -79,12 +81,15 @@ function Movies({ savedMoviesArray, handleGetAllSavedMovies, handleChangeMovieSa
     }, [isDataRecieved]);
 
     useEffect(() => {
-        // let timeOut;
+        let timeOut;
+        const handleChangeMoviesSettingsWithTimeout = () => {
+            timeOut = setTimeout(handleChangeMoviesSettings, 1000);
+        }
         window.addEventListener('resize', handleChangeMoviesSettingsWithTimeout);
 
         return () => {
             window.removeEventListener('resize', handleChangeMoviesSettingsWithTimeout);
-            // clearTimeout(timeOut);
+            clearTimeout(timeOut);
         }
     });
 
@@ -95,7 +100,7 @@ function Movies({ savedMoviesArray, handleGetAllSavedMovies, handleChangeMovieSa
             {moviesArray && (
                 <>
                     <MoviesCardList moviesArray={moviesArray} isLoading={isLoading} isDataRecieved={isDataRecieved} currentMoviesAmount={currentMoviesAmount} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} />
-                    <MoreButton moviesArray={moviesArray} currentMoviesAmount={currentMoviesAmount} onChangeCurrentMoviesAmount={handleChangeCurrentMoviesAmount} isDataRecieved={isDataRecieved} isLoading={isLoading}/>
+                    <MoreButton moviesArray={moviesArray} currentMoviesAmount={currentMoviesAmount} onChangeCurrentMoviesAmount={handleChangeCurrentMoviesAmount} isDataRecieved={isDataRecieved} isLoading={isLoading} />
                 </>)}
         </div>
     );

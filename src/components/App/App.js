@@ -29,59 +29,6 @@ function App() {
 
   const history = useHistory();
 
-  const navigationListForMainPage = [
-    {
-      content: 'Регистрация',
-      to: '/signup',
-      linkClass: ''
-    },
-    {
-      content: 'Войти',
-      to: '/signin',
-      linkClass: 'navigation__link_type_button'
-    }
-  ];
-
-  const navigationListForInnerMenu = [
-    {
-      content: 'Фильмы',
-      to: '/movies',
-      linkClass: 'navigation__link_type_inner-page',
-      activeLinkClass: 'navigation__link_type_active-inner-page'
-    },
-    {
-      content: 'Сохранённые фильмы',
-      to: '/saved-movies',
-      linkClass: 'navigation__link_type_inner-page',
-      activeLinkClass: 'navigation__link_type_active-inner-page'
-    },
-  ];
-
-  const navigationListForInnerBurgerMenu = [
-    {
-      content: 'Главная',
-      to: '/',
-      linkClass: 'navigation__link_type_burger-menu',
-      activeLinkClass: 'navigation__link_type_active-burger-menu'
-    },
-    {
-      content: 'Фильмы',
-      to: '/movies',
-      linkClass: 'navigation__link_type_burger-menu',
-      activeLinkClass: 'navigation__link_type_active-burger-menu'
-    },
-    {
-      content: 'Сохранённые фильмы',
-      to: '/saved-movies',
-      linkClass: 'navigation__link_type_burger-menu',
-      activeLinkClass: 'navigation__link_type_active-burger-menu'
-    },
-  ];
-
-  useEffect(() => {
-    tokenCheck();
-  }, []);
-
   const handleChangeIsDataRecieved = (isDataRecieved) => {
     setIsDataRecieved(isDataRecieved);
   };
@@ -240,6 +187,10 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    tokenCheck();
+  }, []);
+
   if (isTokenCheckLoading) {
     return <></>;
   }
@@ -248,20 +199,36 @@ function App() {
     <CurrentUserContext.Provider value={userData}>
       <Header
         onBurgerMenuClick={handleBurgerMenuClick}
-        navigationListForInnerMenu={navigationListForInnerMenu}
-        navigationListForMainPage={navigationListForMainPage}
         loggedIn={loggedIn}
         isTokenCheckLoading={isTokenCheckLoading}
       />
       <Switch>
         <ProtectedRoute exact path='/movies' loggedIn={loggedIn}>
-          <Movies savedMoviesArray={savedMoviesArray} handleGetAllSavedMovies={handleGetAllSavedMovies} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} handleChangeIsLoading={setIsLoading} isLoading={isLoading} handleBadTokenLogOut={handleBadTokenLogOut} />
+          <Movies
+            savedMoviesArray={savedMoviesArray}
+            handleGetAllSavedMovies={handleGetAllSavedMovies}
+            handleChangeMovieSavingStatus={handleChangeMovieSavingStatus}
+            handleChangeIsLoading={setIsLoading}
+            isLoading={isLoading}
+            handleBadTokenLogOut={handleBadTokenLogOut}
+          />
         </ProtectedRoute>
         <ProtectedRoute exact path="/saved-movies" loggedIn={loggedIn}>
-          <SavedMovies savedMoviesArray={savedMoviesArray} savedMoviesAfterFilter={savedMoviesAfterFilter} handleGetSavedMovies={handleGetSavedMovies} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} handleChangeIsDataRecieved={handleChangeIsDataRecieved} isDataRecieved={isDataRecieved} handleChangeIsLoading={setIsLoading} isLoading={isLoading} handleBadTokenLogOut={handleBadTokenLogOut} />
+          <SavedMovies
+            savedMoviesArray={savedMoviesArray}
+            savedMoviesAfterFilter={savedMoviesAfterFilter}
+            handleGetSavedMovies={handleGetSavedMovies}
+            handleChangeMovieSavingStatus={handleChangeMovieSavingStatus}
+            handleChangeIsDataRecieved={handleChangeIsDataRecieved}
+            isDataRecieved={isDataRecieved} handleChangeIsLoading={setIsLoading}
+            isLoading={isLoading}
+            handleBadTokenLogOut={handleBadTokenLogOut}
+          />
         </ProtectedRoute>
         <ProtectedRoute exact path="/profile" loggedIn={loggedIn}>
-          <Profile handleUpdateUserInfo={handleUpdateUserInfo} handleLogOut={handleLogOut} />
+          <Profile
+            handleUpdateUserInfo={handleUpdateUserInfo}
+            handleLogOut={handleLogOut} />
         </ProtectedRoute>
         <Route path="/signin">
           {loggedIn && <Redirect to="/movies" />}
@@ -281,7 +248,6 @@ function App() {
       </Switch>
       <Footer />
       <Popup
-        navigationList={navigationListForInnerBurgerMenu}
         onClose={handleCloseButtonClick}
         isOpened={isPopupOpened}
       />

@@ -31,11 +31,43 @@ function Register({ handleRegister }) {
 
     return (
         <div className="register">
-            <PageWithForm name={"register-form"} title={"Добро пожаловать!"} buttonTitle={"Зарегистрироваться"} text={"Уже зарегистрированы?"} link={"/signin"} textLink={"Войти"} handleSubmit={handleSubmit} isValid={isValid}>
+            <PageWithForm
+                name={"register-form"}
+                title={"Добро пожаловать!"}
+                buttonTitle={"Зарегистрироваться"}
+                text={"Уже зарегистрированы?"}
+                link={"/signin"}
+                textLink={"Войти"}
+                handleSubmit={handleSubmit}
+                isValid={isValid}
+            >
                 <fieldset className="form__container">
-                    <FormFieldsWithInput subtitle={"Имя"} placeholder={"Введите имя"} name={"name"} type={"text"} value={formValues.name || ''} handleChange={handleChange} errorText={errorMessages.name} />
-                    <FormFieldsWithInput subtitle={"E-mail"} placeholder={"Введите E-mail"} name={"email"} type={"email"} value={formValues.email || ''} handleChange={handleChange} errorText={errorMessages.email} />
-                    <FormFieldsWithInput subtitle={"Пароль"} placeholder={"Введите пароль"} name={"password"} type={"password"} value={formValues.password || ''} handleChange={handleChange} errorText={errorMessages.password} />
+                    <FormFieldsWithInput
+                        subtitle={"Имя"}
+                        placeholder={"Введите имя"}
+                        name={"name"} type={"text"}
+                        value={formValues.name || ''}
+                        handleChange={handleChange}
+                        errorText={errorMessages.name}
+                    />
+                    <FormFieldsWithInput
+                        subtitle={"E-mail"}
+                        placeholder={"Введите E-mail"}
+                        name={"email"}
+                        type={"email"}
+                        value={formValues.email || ''}
+                        handleChange={handleChange}
+                        errorText={errorMessages.email}
+                    />
+                    <FormFieldsWithInput
+                        subtitle={"Пароль"}
+                        placeholder={"Введите пароль"}
+                        name={"password"}
+                        type={"password"}
+                        value={formValues.password || ''}
+                        handleChange={handleChange}
+                        errorText={errorMessages.password}
+                    />
                     <FormError errorText={formError} />
                 </fieldset>
             </PageWithForm>

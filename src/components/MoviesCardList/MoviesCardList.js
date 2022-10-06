@@ -21,7 +21,12 @@ function MoviesCardList({ moviesArray, isLoading, isDataRecieved, currentMoviesA
             <>
                 <ul className="movies-card-list">
                     {moviesArray.slice(0, currentMoviesAmount).map((movie, i) => {
-                        return <MoviesCard key={i} movie={movie} handleChangeMovieSavingStatus={handleChangeMovieSavingStatus} savedMoviesArray={savedMoviesArray} />
+                        return <MoviesCard
+                            key={i}
+                            movie={movie}
+                            handleChangeMovieSavingStatus={handleChangeMovieSavingStatus}
+                            savedMoviesArray={savedMoviesArray}
+                        />
                     })
                     }
                 </ul>

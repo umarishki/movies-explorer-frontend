@@ -6,16 +6,16 @@ import './MoviesCard.css';
 
 function MoviesCard({ movie, handleChangeMovieSavingStatus, savedMoviesArray }) {
     const location = useLocation();
-    const isUserPage = location.pathname === "/saved-movies";
+    const isUserPage = location.pathname === '/saved-movies';
     const isSaved = isUserPage ? true : savedMoviesArray.some(m => m.movieId === movie.id);
 
     const getDuration = () => {
         if (movie.duration < 60) {
-            return (movie.duration + "м");
+            return (movie.duration + 'м');
         } else if (movie.duration % 60 === 0) {
-            return (movie.duration / 60 + "ч");
+            return (movie.duration / 60 + 'ч');
         } else {
-            return ((movie.duration - (movie.duration % 60)) / 60 + "ч " + (movie.duration % 60) + "м");
+            return ((movie.duration - (movie.duration % 60)) / 60 + 'ч ' + (movie.duration % 60) + 'м');
         }
     };
 
