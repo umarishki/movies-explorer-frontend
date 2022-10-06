@@ -17,12 +17,12 @@ export class Api {
             });
     
             if (!res.ok) {
-                return Promise.reject({status: res.status, message: `Ошибка ${res.status}: ${res.statusText}`});
+                return Promise.reject({status: res.status, message: `Ошибка: ${res.message}`});
             }
     
             const data = await res.json();
             if (!data) {
-                return Promise.reject({status: res.status, message: `Ошибка ${res.status}: ${res.statusText}`});
+                return Promise.reject({status: res.status, message: `Ошибка: ${res.message}`});
             }
             return data;
     };

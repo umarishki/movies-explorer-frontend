@@ -15,6 +15,18 @@
     transition: opacity 0.5s ease;
 }
 
+.button:disabled,
+button[disabled]{
+  background: #F8F8F8;
+  color: #C2C2C2;
+  cursor: default;
+}
+
+.button:disabled,
+button[disabled]:hover{
+    opacity: 1;
+}
+
 .form-button:focus-visible {
     outline-color: #8B8B8B;
     outline-width: 2px;

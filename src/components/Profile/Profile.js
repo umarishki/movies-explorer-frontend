@@ -6,67 +6,64 @@ import FormError from '../FormError/FormError';
 import FormFieldsForProfile from '../FormFieldsForProfile/FormFieldsForProfile';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { useContext } from 'react';
+import Validation from '../Validation/Validation';
 
 function Profile({ handleUpdateUserInfo, handleLogOut }) {
 
     const currentUser = useContext(CurrentUserContext);
 
     const [isEditProcess, setIsEditProcess] = useState(false);
-    const [formValues, setFormValues] = useState({ email: '', name: '' });
-    const [errorText, setErrorText] = useState('');
+    const [formError, setFormError] = useState('');
+
+    const {
+        formValues,
+        setFormValues,
+        handleChange,
+        isValid,
+        resetForm,
+    } = Validation();
+
 
     useEffect(() => {
         setFormValues({ name: currentUser.name, email: currentUser.email });
     }, [currentUser]);
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormValues(prevState => ({ ...prevState, [name]: value }));
-    }
 
     const handleEditButtonClick = () => {
         setIsEditProcess(true);
     }
 
     const handleSubmit = (e) => {
-        setErrorText('');
         e.preventDefault();
-        const { email, name } = formValues;
-        if (!email || !name) {
-            setErrorText('Обязательные поля не заполнены');
-            return;
-        }
 
-        if (currentUser.email === email && currentUser.name === name) {
-            setErrorText('Данные пользователя не были изменены');
-            return;
-        }
-
-        handleUpdateUserInfo({ email, name }).catch((err) => {
-            console.log(err);
+        handleUpdateUserInfo(formValues).catch((err) => {
+            setFormError(err.message);
         });
         setIsEditProcess(false);
     }
 
+    useEffect(() => {
+        resetForm();
+    }, [resetForm]);
+
     return (
         <div className="profile">
-            <PageWithForm title={"Привет, " + currentUser.name} buttonTitle={"Сохранить"} handleSubmit={handleSubmit}>
+            <PageWithForm name={"profile-form"} title={"Привет, " + currentUser.name} buttonTitle={"Сохранить"} handleSubmit={handleSubmit} isValid={null}>
                 <div className="profile__container">
                     {isEditProcess ? (
                         <>
                             <div className="profile__fields__content">
-                                <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={"Введите имя"} inputType={"text"} inputName={"name"} handleSetValue={handleChange} currentValue={formValues.name} />
-                                <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={"Введите E-mail"} inputType={"email"} inputName={"email"} handleSetValue={handleChange} currentValue={formValues.email} />
-                                <FormError errorText={errorText} />
+                                <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={"Введите имя"} name={"name"} type={"text"} handleSetValue={handleChange} value={formValues.name || ''}/>
+                                <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={"Введите E-mail"} name={"email"} type={"email"} handleSetValue={handleChange} value={formValues.email || ''} />
+                                <FormError errorText={formError} />
                             </div>
-                            <FormButton title={"Сохранить"} />
+                            <FormButton title={"Сохранить"} isValid={isValid}/>
                         </>
                     ) :
                         (
                             <>
                                 <div className="profile__fields__content">
-                                    <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={null} inputType={null} inputName={null} handleSetValue={null} currentValue={formValues.name} />
-                                    <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={null} inputType={null} inputName={null} handleSetValue={null} currentValue={formValues.email} />
+                                    <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"Имя"} placeholder={null} name={"name"} type={"text"} handleSetValue={null} value={formValues.name || ''} />
+                                    <FormFieldsForProfile isEditProcess={isEditProcess} subtitle={"E-mail"} placeholder={null} name={"email"} type={"email"} handleSetValue={null} value={formValues.email || ''} />
                                 </div>
                                 <ul className="profile__menu">
                                     <li className="profile__list-item">

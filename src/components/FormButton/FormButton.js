@@ -1,9 +1,9 @@
 import './FormButton.css';
 
-function FormButton({ title }) {
+function FormButton({ title, isValid }) {
 
     return (
-        <button className="form-button" type="submit">{ title }</button>
+        <button className="form-button" type="submit" disabled={!isValid}>{title}</button>
     );
 };
 

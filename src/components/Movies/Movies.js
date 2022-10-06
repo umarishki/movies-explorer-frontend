@@ -69,21 +69,22 @@ function Movies({ savedMoviesArray, handleGetAllSavedMovies, handleChangeMovieSa
         setIsDataRecieved(isDataRecieved);
     };
 
+    const handleChangeMoviesSettingsWithTimeout = () => {
+        const timeOut = setTimeout(handleChangeMoviesSettings, 5000);
+    }
+
     useEffect(() => {
         handleChangeMoviesSettings();
         handleGetAllSavedMovies();
     }, [isDataRecieved]);
 
     useEffect(() => {
-        let timeOut;
-        const handleChangeMoviesSettingsWithTimeout = () => {
-            timeOut = setTimeout(handleChangeMoviesSettings, 1000);
-        }
+        // let timeOut;
         window.addEventListener('resize', handleChangeMoviesSettingsWithTimeout);
 
         return () => {
             window.removeEventListener('resize', handleChangeMoviesSettingsWithTimeout);
-            clearTimeout(timeOut);
+            // clearTimeout(timeOut);
         }
     });
 

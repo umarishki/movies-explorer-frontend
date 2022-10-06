@@ -7,9 +7,20 @@
     width: 396px;
 }
 
+.form__container {
+    margin: 0;
+    padding: 0;
+    padding-top: 40px;
+    border: none;
+}
+
 @media screen and (max-width: 767px) {
     .register {
         width: 260px;
         align-items: center;
+    }
+
+    .form__container {
+        padding-top: 80px;
     }
 }

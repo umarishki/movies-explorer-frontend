@@ -5,22 +5,22 @@ import { Switch, Route } from 'react-router-dom';
 import FormButton from '../FormButton/FormButton';
 import ButtonNote from '../ButtonNote/ButtonNote';
 
-function PageWithForm({ title, buttonTitle, text, link, textLink, handleSubmit, children }) {
+function PageWithForm({ name, title, buttonTitle, text, link, textLink, handleSubmit, isValid, children }) {
     return (
         <>
             <Switch>
                 <Route exact path="/profile">
-                    <form className="form form_centered" onSubmit={handleSubmit}>
+                    <form className="form form_centered" name={ name } onSubmit={handleSubmit}>
                     <FormTitle title={title} />
                         {children}
                     </form>
                 </Route>
                 <Route exact path="/*">
-                    <form className="form" onSubmit={handleSubmit}>
+                    <form className="form" name={ name } onSubmit={handleSubmit}>
                     <Logo />
                     <FormTitle title={title} />
                         {children}
-                        <FormButton title={buttonTitle} />
+                        <FormButton title={buttonTitle} isValid={isValid} />
                     </form>
                     <ButtonNote text={text} link={link} textLink={textLink} />
                 </Route>

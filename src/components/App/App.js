@@ -119,7 +119,7 @@ function App() {
       setSavedMoviesArray(savedMovies);
       setIsDataRecieved(true);
     }).catch((err) => {
-      console.log(err);
+      handleBadTokenLogOut(err);
     });
   }
 
@@ -149,8 +149,7 @@ function App() {
       setSavedMoviesAfterFilter(newArray);
       localStorage.setItem('savedMoviesAfterFilter', JSON.stringify(newArray));
     }).catch((err) => {
-      handleBadTokenLogOut();
-      console.log(err);
+      handleBadTokenLogOut(err);
     });
   }
 
@@ -170,8 +169,7 @@ function App() {
     }).then((savedMovie) => {
       handleGetAllSavedMovies();
     }).catch((err) => {
-      handleBadTokenLogOut();
-      console.log(err);
+      handleBadTokenLogOut(err);
     });
   };
 
@@ -187,7 +185,7 @@ function App() {
   const handleRegister = ({ email, password, name }) => {
     return mainApi.postUser({ email: email, password: password, name: name }).then((user) => {
       handleLogin({ email, password }).catch((err) => {
-        console.log(err);
+        handleBadTokenLogOut(err);
       });
     });
   };
@@ -220,7 +218,6 @@ function App() {
         })
         .catch((err) => {
           handleBadTokenLogOut(err);
-          console.log(err);
         });
     }
     else {
@@ -234,12 +231,7 @@ function App() {
     setIsTokenCheckLoading(false);
     setLoggedIn(false);
     history.push('/');
-    localStorage.removeItem('savedMoviesAfterFilter');
-    localStorage.removeItem('searchSavedMovies');
-    localStorage.removeItem('isShortSavedMoviesIncluded');
-    localStorage.removeItem('movies');
-    localStorage.removeItem('searchMovies');
-    localStorage.removeItem('isShortMoviesIncluded');
+    localStorage.clear();
   }
 
   const handleBadTokenLogOut = (err) => {
