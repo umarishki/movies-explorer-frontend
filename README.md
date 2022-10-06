@@ -19,3 +19,5 @@
 * Фронтенд-приложение: https://umarishki.diploma.nomorepartiesxyz.ru/
 * Бэкенд: https://api.umarishki.diploma.nomorepartiesxyz.ru
 * Макеты: https://disk.yandex.ru/d/I-9Vr7hYi3qZuw
+
+* Пул-реквест: https://github.com/umarishki/movies-explorer-frontend/pull/2
