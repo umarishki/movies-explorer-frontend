@@ -15,7 +15,7 @@ function Login({ handleLogin }) {
         handleChange,
         isValid,
         resetForm,
-    } = Validation();
+    } = Validation({});
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,6 +50,9 @@ function Login({ handleLogin }) {
                         value={formValues.email || ''}
                         handleChange={handleChange}
                         errorText={errorMessages.email}
+                        minLength={null}
+                        maxLength={null}
+                        pattern={null}
                     />
                     <FormFieldsWithInput
                         subtitle={"Пароль"}
@@ -58,6 +61,9 @@ function Login({ handleLogin }) {
                         value={formValues.password || ''}
                         handleChange={handleChange}
                         errorText={errorMessages.password}
+                        minLength={6}
+                        maxLength={null}
+                        pattern={null}
                     />
                     <FormError errorText={formError} />
                 </fieldset>

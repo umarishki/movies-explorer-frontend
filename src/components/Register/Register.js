@@ -15,7 +15,7 @@ function Register({ handleRegister }) {
         handleChange,
         isValid,
         resetForm,
-    } = Validation();
+    } = Validation({});
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -49,6 +49,9 @@ function Register({ handleRegister }) {
                         value={formValues.name || ''}
                         handleChange={handleChange}
                         errorText={errorMessages.name}
+                        minLength={2}
+                        maxLength={30}
+                        pattern={"^[а-яА-ЯёЁa-zA-Z -]+"}
                     />
                     <FormFieldsWithInput
                         subtitle={"E-mail"}
@@ -58,6 +61,8 @@ function Register({ handleRegister }) {
                         value={formValues.email || ''}
                         handleChange={handleChange}
                         errorText={errorMessages.email}
+                        minLength={null}
+                        maxLength={null}
                     />
                     <FormFieldsWithInput
                         subtitle={"Пароль"}
@@ -67,6 +72,8 @@ function Register({ handleRegister }) {
                         value={formValues.password || ''}
                         handleChange={handleChange}
                         errorText={errorMessages.password}
+                        minLength={6}
+                        maxLength={null}
                     />
                     <FormError errorText={formError} />
                 </fieldset>

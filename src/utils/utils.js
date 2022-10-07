@@ -1,4 +1,4 @@
-const regexUserName = /[^[a-zа-яё -]+$/i
+const regexUserName = /[^[а-яА-ЯёЁa-zA-Z -]+/i
 
 const navigationListForMainPage = [
     {

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { regexUserName } from '../../utils/utils';
 import isEmail from 'validator/es/lib/isEmail';
 
-const Validation = () => {
+const Validation = (currentUser) => {
 
     const [formValues, setFormValues] = useState({ name: '', email: '', password: '' });
     const [errorMessages, setErrorMessages] = useState({ name: '', email: '', password: '' });
@@ -84,14 +84,25 @@ const Validation = () => {
                 'password': ''
             });
             setIsValid(e.target.closest('form').checkValidity());
+            console.log(e.target.closest('form').checkValidity());
         };
     };
 
     const checkValueValidation = (e, inputName, value) => {
         if (inputName === 'name') {
             checkNameValidation(e, value);
+            if ((value === currentUser.name) && (formValues.email === currentUser.email)) {
+                console.log((value === currentUser.name) && (formValues.email === currentUser.email));
+                setIsValid(false);
+                console.log("value: 1");
+            } 
         } else if (inputName === 'email') {
             checkEmailValidation(e, value);
+            if ((value === currentUser.email) && (formValues.name === currentUser.name)) {
+                console.log((value === currentUser.email) && (formValues.name === currentUser.name));
+                setIsValid(false);
+                console.log("value: 2");
+            }
         } else if (inputName === 'password') {
             checkPasswordValidation(e, value);
         };
@@ -102,9 +113,9 @@ const Validation = () => {
         const value = e.target.value;
 
         setFormValues({ ...formValues, [name]: value });
+
         checkValueValidation(e, name, value);
     }
-
 
     const resetForm = useCallback((newValues = {}, newErrors = {}, newIsValid = false) => {
         setFormValues(newValues);
@@ -121,6 +132,7 @@ const Validation = () => {
         handleChange,
         isValid,
         resetForm,
+        setIsValid,
     };
 }
 

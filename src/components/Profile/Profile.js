@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './Profile.css';
 import PageWithForm from '../PageWithForm/PageWithForm';
 import FormButton from '../FormButton/FormButton';
+import FormMessage from '../FormMessage/FormMessage';
 import FormError from '../FormError/FormError';
 import FormFieldsForProfile from '../FormFieldsForProfile/FormFieldsForProfile';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
@@ -13,6 +14,7 @@ function Profile({ handleUpdateUserInfo, handleLogOut }) {
     const currentUser = useContext(CurrentUserContext);
 
     const [isEditProcess, setIsEditProcess] = useState(false);
+    const [formMessage, setFormMessage] = useState('');
     const [formError, setFormError] = useState('');
 
     const {
@@ -21,7 +23,8 @@ function Profile({ handleUpdateUserInfo, handleLogOut }) {
         handleChange,
         isValid,
         resetForm,
-    } = Validation();
+        setIsValid
+    } = Validation(currentUser);
 
     useEffect(() => {
         resetForm();
@@ -33,18 +36,29 @@ function Profile({ handleUpdateUserInfo, handleLogOut }) {
         };
     }, []);
 
+    useEffect(() => {
+        if (currentUser) {
+            if (formValues.name === currentUser.name || formValues.email === currentUser.email) {
+                setIsValid(false);
+            }
+        }
+    }, [formValues.name, formValues.email, isEditProcess])
+
     const handleEditButtonClick = () => {
         setIsEditProcess(true);
     }
 
     const handleSubmit = (e) => {
+        setFormMessage('');
         setFormError('');
         e.preventDefault();
 
         handleUpdateUserInfo(formValues).catch((err) => {
             setFormError(err.message);
+            return;
         });
         setIsEditProcess(false);
+        setFormMessage("Новые данные успешно сохранены");
     }
 
     return (
@@ -68,6 +82,9 @@ function Profile({ handleUpdateUserInfo, handleLogOut }) {
                                     type={"text"}
                                     handleSetValue={handleChange}
                                     value={formValues.name || ''}
+                                    minLength={2}
+                                    maxLength={30}
+                                    pattern={"^[а-яА-ЯёЁa-zA-Z -]+"}
                                 />
                                 <FormFieldsForProfile
                                     isEditProcess={isEditProcess}
@@ -77,6 +94,9 @@ function Profile({ handleUpdateUserInfo, handleLogOut }) {
                                     type={"email"}
                                     handleSetValue={handleChange}
                                     value={formValues.email || ''}
+                                    minLength={null}
+                                    maxLength={null}
+                                    pattern={null}
                                 />
                                 <FormError errorText={formError} />
                             </div>
@@ -94,6 +114,9 @@ function Profile({ handleUpdateUserInfo, handleLogOut }) {
                                         type={"text"}
                                         handleSetValue={null}
                                         value={formValues.name || ''}
+                                        minLength={2}
+                                        maxLength={30}
+                                        pattern={"^[а-яА-ЯёЁa-zA-Z -]+"}
                                     />
                                     <FormFieldsForProfile
                                         isEditProcess={isEditProcess}
@@ -103,7 +126,11 @@ function Profile({ handleUpdateUserInfo, handleLogOut }) {
                                         type={"email"}
                                         handleSetValue={null}
                                         value={formValues.email || ''}
+                                        minLength={null}
+                                        maxLength={null}
+                                        pattern={null}
                                     />
+                                    <FormMessage text={formMessage} />
                                 </div>
                                 <ul className="profile__menu">
                                     <li className="profile__list-item">

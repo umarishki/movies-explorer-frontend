@@ -1,6 +1,6 @@
 import './FormFieldsForProfile.css';
 
-function FormFieldsForProfile({ isEditProcess, subtitle, placeholder, name, type, handleSetValue, value }) {
+function FormFieldsForProfile({ isEditProcess, subtitle, placeholder, name, type, handleSetValue, value, minLength, maxLength, pattern }) {
 
     return (
         <div className="profile__fields-container">
@@ -14,7 +14,10 @@ function FormFieldsForProfile({ isEditProcess, subtitle, placeholder, name, type
                         placeholder={placeholder}
                         onChange={handleSetValue}
                         value={value || ''}
-                        required autoComplete="off"
+                        required
+                        minLength={minLength}
+                        maxLength={maxLength}
+                        pattern={pattern}
                     />
                 )
                 :

@@ -242,7 +242,6 @@ function App() {
           <Main />
         </Route>
         <Route path="*">
-          {!loggedIn && <Redirect to="/signin" />}
           <NotFoundPage />
         </Route>
       </Switch>
