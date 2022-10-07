@@ -174,6 +174,7 @@ function App() {
 
   const handleLogOut = () => {
     localStorage.removeItem('token');
+    setSavedMoviesArray([]);
     setUserData(null);
     setIsTokenCheckLoading(false);
     setLoggedIn(false);

@@ -37,12 +37,9 @@ function Profile({ handleUpdateUserInfo, handleLogOut }) {
     }, []);
 
     useEffect(() => {
-        if (currentUser) {
-            if (formValues.name === currentUser.name || formValues.email === currentUser.email) {
-                setIsValid(false);
-            }
-        }
-    }, [formValues.name, formValues.email, isEditProcess])
+        setIsValid(false);
+    }, [isEditProcess])
+
 
     const handleEditButtonClick = () => {
         setIsEditProcess(true);

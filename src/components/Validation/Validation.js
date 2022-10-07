@@ -84,25 +84,14 @@ const Validation = (currentUser) => {
                 'password': ''
             });
             setIsValid(e.target.closest('form').checkValidity());
-            console.log(e.target.closest('form').checkValidity());
         };
     };
 
     const checkValueValidation = (e, inputName, value) => {
         if (inputName === 'name') {
             checkNameValidation(e, value);
-            if ((value === currentUser.name) && (formValues.email === currentUser.email)) {
-                console.log((value === currentUser.name) && (formValues.email === currentUser.email));
-                setIsValid(false);
-                console.log("value: 1");
-            } 
         } else if (inputName === 'email') {
             checkEmailValidation(e, value);
-            if ((value === currentUser.email) && (formValues.name === currentUser.name)) {
-                console.log((value === currentUser.email) && (formValues.name === currentUser.name));
-                setIsValid(false);
-                console.log("value: 2");
-            }
         } else if (inputName === 'password') {
             checkPasswordValidation(e, value);
         };
