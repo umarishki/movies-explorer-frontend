@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useState } from 'react';
 import { regexUserName } from '../../utils/utils';
 import isEmail from 'validator/es/lib/isEmail';
@@ -105,6 +105,14 @@ const Validation = (currentUser) => {
 
         checkValueValidation(e, name, value);
     }
+
+    useEffect(() => {
+        if(currentUser) {
+            if(isValid && (formValues.name === currentUser.name && formValues.email === currentUser.email)) {
+                setIsValid(false);
+            }
+        }
+    },[formValues])
 
     const resetForm = useCallback((newValues = {}, newErrors = {}, newIsValid = false) => {
         setFormValues(newValues);
