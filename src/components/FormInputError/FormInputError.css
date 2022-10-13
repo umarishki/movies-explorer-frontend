@@ -10,8 +10,13 @@
     color: #EE3465;
     max-height: 50px;
     width: 396px;
-    margin-bottom: 10px;
+    height: 12px;
     text-align: left;
+    visibility: hidden;
+}
+
+.input-error_visible {
+    visibility: visible;
 }
 
 @media screen and (max-width: 767px) {

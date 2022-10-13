@@ -43,7 +43,7 @@
 }
 
 .form__fields-container:last-of-type {
-    margin-bottom: 179px;
+    margin-bottom: 65px;
 }
 
 @media screen and (max-width: 767px) {
@@ -56,6 +56,6 @@
     }
 
     .form__fields-container:last-of-type {
-        margin-bottom: 247px;
+        margin-bottom: 106px;
     }
 }

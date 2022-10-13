@@ -1,9 +1,9 @@
 import './HorizontalSeparator.css';
 
 function HorizontalSeparator() {
-   
+
     return (
-            <div className="movies__separator"></div>
+        <div className="movies__separator"></div>
     );
 }
 

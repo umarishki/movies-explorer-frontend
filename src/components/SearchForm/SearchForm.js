@@ -1,12 +1,24 @@
 import './SearchForm.css';
 import searchIcon from '../../images/search-icon.svg';
 import searchButton from '../../images/search-button.svg';
-import { getMovies } from '../../utils/MoviesApi';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-function SearchForm({ onLoad, onDataReceive }) {
-    const [searchFormValue, setsearchFormValue] = useState('');
-    const [isShortMoviesIncluded, setIsShortMoviesIncluded] = useState(false);
+function SearchForm({ handleGetMoviesArray, handleChangeIsLoading, onDataReceive, handleBadTokenLogOut }) {
+
+    const location = useLocation();
+    const isUserPage = location.pathname === "/saved-movies";
+
+    const getSerchTextValue = () => {
+        if (isUserPage) {
+            return { searchSavedMovies: localStorage.getItem('searchSavedMovies') || '', isShortMoviesIncluded: localStorage.getItem('isShortSavedMoviesIncluded') === "true" ? true : false };
+        } else {
+            return { searchSavedMovies: localStorage.getItem('searchMovies') || '', isShortMoviesIncluded: localStorage.getItem('isShortMoviesIncluded') === "true" ? true : false };
+        }
+    };
+
+    const [searchFormValue, setsearchFormValue] = useState(getSerchTextValue().searchSavedMovies);
+    const [isShortMoviesIncluded, setIsShortMoviesIncluded] = useState(getSerchTextValue().isShortMoviesIncluded);
     const [error, setError] = useState('');
 
     const handleChangeInput = (e) => {
@@ -16,30 +28,25 @@ function SearchForm({ onLoad, onDataReceive }) {
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         setError('');
-        localStorage.setItem('searchData', searchFormValue);
-        localStorage.setItem('isShortMoviesIncluded', isShortMoviesIncluded);
         onDataReceive(false);
+
         if (searchFormValue === '') {
             return setError('Нужно ввести ключевое слово');
         }
-        onLoad(true);
-        getMovies().then((movies) => {
-            onLoad(false);
-            if(!movies) {
-                throw new Error('Ничего не найдено');
-            }
-            localStorage.setItem('movies', JSON.stringify(movies));
-            onDataReceive(true);
-            console.log(JSON.parse(localStorage.getItem('movies') || "[]"));
-        }).catch((err) => {
+
+        handleChangeIsLoading(true);
+
+        handleGetMoviesArray(searchFormValue.trim(), isShortMoviesIncluded).catch((err) => {
+            handleBadTokenLogOut();
             setError(err.message);
-            onLoad(false);
+            handleChangeIsLoading(false);
         });
+        setTimeout(() => handleChangeIsLoading(false), 1000);
     }
 
     const handleChangeSwitcher = () => {
         isShortMoviesIncluded ?
-        setIsShortMoviesIncluded(false) : setIsShortMoviesIncluded(true);
+            setIsShortMoviesIncluded(false) : setIsShortMoviesIncluded(true);
     }
 
     return (
@@ -68,8 +75,8 @@ function SearchForm({ onLoad, onDataReceive }) {
                             type="checkbox"
                             name="short-movies-switcher"
                             id="search-form-checkbox-input"
-                            value={false}
                             onChange={handleChangeSwitcher}
+                            checked={isShortMoviesIncluded}
                         />
                         <span className="search-form__slider"></span>
                     </label>

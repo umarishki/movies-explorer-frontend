@@ -17,6 +17,7 @@
 
 .profile__fields__content {
     margin-bottom: 204px;
+    height: 200px;
 }
 
 .profile__menu {
@@ -75,9 +76,9 @@
     }
 
     .profile__fields-container:last-of-type {
-        margin-bottom: 179px;
+        margin-bottom: 65px;
     }
-    
+
     .profile__link-button {
         font-size: 12px;
         line-height: 15px;

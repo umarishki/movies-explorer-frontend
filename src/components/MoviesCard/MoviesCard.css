@@ -27,8 +27,12 @@
     padding: 0;
     border: none;
     align-self: center;
-    cursor: pointer;
     transition: opacity 0.5s ease;
+    cursor: pointer;
+}
+
+.movies-card__link-container {
+    text-decoration: none;
 }
 
 .movies-card__save-button:focus-visible {
@@ -60,6 +64,10 @@
     font-weight: 500;
     font-size: 15px;
     line-height: 18px;
+    color: white;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .movies-card__time {
@@ -100,7 +108,7 @@
     .movies-card {
         width: 300px;
         height: 236px;
-    } 
+    }
 
     .movies-card__image {
         width: 300px;

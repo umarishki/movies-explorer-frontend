@@ -1,9 +1,5 @@
 const request = async (methodApi, urlApi, baseUrl, headers) => {
-    // const token = this._getAuthToken();
 
-    // if (token) {
-    //     this._headers['authorization'] = `Bearer ${token}`;
-    // }
         const res = await fetch(`${baseUrl}${urlApi}`, {
             method: methodApi,
             headers: headers,
@@ -19,10 +15,6 @@ const request = async (methodApi, urlApi, baseUrl, headers) => {
         }
         return data;
 };
-
-// _getAuthToken() {
-//     return localStorage.getItem('token');
-// }
 
 export const getMovies = () => {
     return request(

@@ -1,25 +1,39 @@
 import Navigation from '../Navigation/Navigation';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import NavigationWithInnerMenu from '../NavigationWithInnerMenu/NavigationWithInnerMenu';
+import { navigationListForMainPage } from '../../utils/utils';
+import { navigationListForInnerMenu } from '../../utils/utils';
 import './Header.css';
 import Logo from '../Logo/Logo';
-// import { useLocation } from 'react-router-';
 
-function Header({ onBurgerMenuClick, navigationListForInnerMenu, navigationListForMainPage }) {
+function Header({ onBurgerMenuClick, loggedIn, isTokenCheckLoading }) {
     const location = useLocation();
+
+    if (isTokenCheckLoading) {
+        return <></>;
+    }
 
     return (
         <header className={location.pathname === "/" ? "header header_background-color_blue" : "header"}>
             <div className='header__content'>
                 <Switch>
                     <Route exact path="/">
-                        <Logo />
-                        <Navigation
-                            navigationClass={null}
-                            navigationList={navigationListForMainPage}
-                            isRoute={true}
-                            targetType={null}
-                        />
+                        {loggedIn ?
+                            <NavigationWithInnerMenu
+                                navigationListForInnerMenu={navigationListForInnerMenu}
+                                onBurgerMenuClick={onBurgerMenuClick}
+                            />
+                            :
+                            <>
+                                <Logo />
+                                <Navigation
+                                    navigationClass={null}
+                                    navigationList={navigationListForMainPage}
+                                    isRoute={true}
+                                    targetType={null}
+                                />
+                            </>
+                        }
                     </Route>
                     <Route exact path="/movies">
                         <NavigationWithInnerMenu
